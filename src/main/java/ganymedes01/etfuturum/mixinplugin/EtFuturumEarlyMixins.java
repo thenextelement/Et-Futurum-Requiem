@@ -90,6 +90,26 @@ public class EtFuturumEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoade
 			mixins.add("lightningrod.MixinWorldServer");
 		}
 
+		if (ConfigBlocksItems.enableNewBoats) {
+			mixins.add("boatstats.MixinEntityPlayer");
+		}
+
+		if (ConfigBlocksItems.enableShield) {
+			mixins.add("shield.MixinEntityPlayer");
+			if (side == MixinEnvironment.Side.CLIENT) {
+				mixins.add("shield.client.MixinModelBiped");
+			}
+		}
+
+		if (ConfigBlocksItems.enableDragonHead) {
+			mixins.add("dragonhead.MixinItemSkull");
+			if (side == MixinEnvironment.Side.CLIENT) {
+				mixins.add("dragonhead.client.MixinTileEntitySkullRenderer");
+				mixins.add("dragonhead.client.MixinRenderBiped");
+				mixins.add("dragonhead.client.MixinRenderPlayer");
+			}
+		}
+
 		if (ConfigBlocksItems.enableCartographyTable) {
 			mixins.add("cartography.MixinItemMap");
 		}

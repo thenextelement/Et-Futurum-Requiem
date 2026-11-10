@@ -1,5 +1,7 @@
 package ganymedes01.etfuturum.core.utils.structurenbt;
 
+import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import ganymedes01.etfuturum.configuration.configs.ConfigWorld;
 import net.minecraft.block.Block;
@@ -50,7 +52,8 @@ public class EFRBlockStateConverter extends BlockStateConverter {
 		switch (truncatedName) { //Blocks we don't have but are used in a structure.
 			case "dragon_head":
 			case "dragon_wall_head":
-				return Blocks.air;
+				if (!ConfigBlocksItems.enableDragonHead) return Blocks.air; // otherwise a type 5 skull
+				break;
 		}
 
 		switch (truncatedName) {

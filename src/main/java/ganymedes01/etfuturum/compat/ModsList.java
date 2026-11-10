@@ -58,6 +58,7 @@ public enum ModsList {
 	RPLE("rple"),
 
 	GTNH("dreamcraft"),
+	BACKHAND("backhand"),
 	;
 
 	private final String modID;

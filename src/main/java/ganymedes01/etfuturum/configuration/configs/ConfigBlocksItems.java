@@ -86,6 +86,8 @@ public class ConfigBlocksItems extends ConfigBase {
 	public static boolean enableBoneBlock;
 	public static boolean enableConcrete;
 	public static boolean enableTotemUndying;
+	public static boolean enableShield;
+	public static boolean enableDragonHead;
 	public static boolean enableRawOres;
 	public static boolean enableNewDyes;
 	public static boolean enableVanillaWoodRedstone;
@@ -340,6 +342,8 @@ public class ConfigBlocksItems extends ConfigBase {
 		enableRawOres = getBoolean("enableRawOres", catItemMisc, true, "If true, vanilla and Et Futurum copper ores will drop raw ore items.");
 
 		enableTotemUndying = getBoolean("enableTotemUndying", catItemMisc, true, "");
+		enableDragonHead = getBoolean("enableDragonHead", catBlockMisc, true, "Dragon heads: skull type 5, found on End ships. The mouth moves when powered by redstone, or when worn and walking.");
+		enableShield = getBoolean("enableShield", catItemEquipment, true, "Shields block attacks from the front once raised, and can be decorated with a banner in a crafting grid.\nWith Backhand installed, a shield in the offhand is raised before the main hand item is used.");
 		enableSuspiciousStew = getBoolean("enableSuspiciousStew", catItemMisc, true, "");
 		enableNewDyes = getBoolean("enableNewDyes", catItemMisc, true, "");
 

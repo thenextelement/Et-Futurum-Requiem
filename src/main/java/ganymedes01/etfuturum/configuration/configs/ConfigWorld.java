@@ -78,6 +78,7 @@ public class ConfigWorld extends ConfigBase {
 	public static boolean oldStraySpawning;
 
 	public static boolean enableDripstoneGen;
+	public static boolean enableEndCities;
 	public static int dripstoneGenChance;
 
 	public static final String catClient = "client";
@@ -123,6 +124,7 @@ public class ConfigWorld extends ConfigBase {
 		deepslateReplacesStones = getBoolean("deepslateReplacesStones", catGeneration, true, "Whether or not Deepslate will overwrite granite, diorite, andesite (Only works when deepslate generation mode is set to 0)");
 		deepslateReplacesDirt = getBoolean("deepslateReplacesDirt", catGeneration, true, "Whether or not Deepslate will overwrite dirt (Only works when deepslate generation mode is set to 0)");
 		deepslateGenerationMode = getInt("deepslateGenerationMode", catGeneration, 0, -1, 1, "If 0, deepslate replaces all stone below the specified value, with a shattering effect near the top similar to bedrock. If 1, it generates in clusters using the deepslate cluster settings. -1 disables Et Futurum deepslate generation entirely.");
+		enableEndCities = getBoolean("enableEndCities", catGeneration, true, "Generates End cities (with End ships, elytra, loot and shulkers) on the outer End islands, past 1024 blocks from the centre.\nWorks with whichever mod generates the End, including Hardcore Ender Expansion and Et Futurum's own endDimensionProvider.");
 		enableOceanMonuments = getBoolean("enableOceanMonuments", catGeneration, true, "Note: Ocean monuments currently do not have guardians");
 		enableFossils = getBoolean("enableFossils", catGeneration, true, "");
 		if (hasKey(catGeneration, "fossilBoneBlock")) {

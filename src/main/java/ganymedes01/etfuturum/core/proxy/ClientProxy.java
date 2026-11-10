@@ -7,6 +7,7 @@ import cpw.mods.fml.client.registry.RenderingRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import ganymedes01.etfuturum.ModBlocks;
 import ganymedes01.etfuturum.api.event.GlowLichenHighlightEvent;
+import ganymedes01.etfuturum.ModItems;
 import ganymedes01.etfuturum.client.model.ModelShulker;
 
 import ganymedes01.etfuturum.client.renderer.block.BlockAmethystClusterRenderer;
@@ -147,6 +148,9 @@ public class ClientProxy extends CommonProxy {
 	private void registerItemRenderers() {
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.BANNER.get()), new ItemBannerRenderer());
 		MinecraftForgeClient.registerItemRenderer(Items.skull, new ItemSkullRenderer());
+		if (ModItems.SHIELD.isEnabled()) {
+			MinecraftForgeClient.registerItemRenderer(ModItems.SHIELD.get(), new ItemShieldRenderer());
+		}
 		MinecraftForgeClient.registerItemRenderer(Items.bow, new ItemBowRenderer());
 		MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(ModBlocks.SHULKER_BOX.get()), new ItemShulkerBoxRenderer());
 		if (ConfigFunctions.inventoryBedModels) {
