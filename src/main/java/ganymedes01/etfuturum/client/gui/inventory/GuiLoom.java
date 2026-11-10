@@ -1,5 +1,7 @@
 package ganymedes01.etfuturum.client.gui.inventory;
 
+import ganymedes01.etfuturum.blocks.itemblocks.ItemBlockBanner;
+import ganymedes01.etfuturum.client.LayeredColorMaskTexture;
 import ganymedes01.etfuturum.client.gui.modern.GuiPanel;
 import ganymedes01.etfuturum.client.gui.modern.ModernGuiTextures;
 import ganymedes01.etfuturum.inventory.ContainerLoom;
@@ -12,11 +14,17 @@ import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.ResourceLocation;
 import org.lwjgl.input.Mouse;
 import org.lwjgl.opengl.GL11;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class GuiLoom extends GuiContainer {
 
@@ -84,13 +92,19 @@ public class GuiLoom extends GuiContainer {
 			GuiPanel.raised(left + SCROLL_X, scrollerY, 12, SCROLLER_H, false, hiddenRows() == 0);
 		}
 
+		ItemStack result = container.getSlot(3).getStack();
+		if (result != null) {
+			Slot resultSlot = container.getSlot(3);
+			drawResultPreview(result, left + resultSlot.xDisplayPosition - 2, top + 13);
+		}
+
 		if (!showPatterns) return;
 
 		List<EnumBannerPattern> patterns = container.getPatterns();
 		ItemStack banner = container.getSlot(0).getStack();
-		int baseRGB = banner == null ? 0xFFFFFF : EnumColor.fromDamage(TileEntityBanner.getBaseColor(banner)).getRGB();
+		EnumColor baseColor = EnumColor.fromDamage(banner == null ? 15 : TileEntityBanner.getBaseColor(banner));
 		int dye = ContainerLoom.getDyeColor(container.getSlot(1).getStack());
-		int patternRGB = dye < 0 ? 0xFFFFFF : EnumColor.fromDamage(dye).getRGB();
+		EnumColor dyeColor = EnumColor.fromDamage(dye < 0 ? 0 : dye);
 
 		int first = startRow * COLUMNS;
 		for (int i = first; i < Math.min(patterns.size(), first + ROWS * COLUMNS); i++) {
@@ -105,34 +119,70 @@ public class GuiLoom extends GuiContainer {
 			} else {
 				GuiPanel.raised(tx, ty, TILE, TILE, hovered, selected);
 			}
-			drawPatternPreview(tx + 4.5D, ty + 2, patterns.get(i), baseRGB, patternRGB);
+			drawPatternPreview(tx + 4.5D, ty + 2, patterns.get(i), baseColor, dyeColor);
 		}
 		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 	}
 
+	private static final Map<String, ResourceLocation> COMPOSITES = new HashMap<>();
+
 	/**
-	 * Draws the front of a small banner (5x10) with the pattern on it.
+	 * A banner texture with the given layers baked in, made the same way the banner renderer does it.
 	 */
-	private void drawPatternPreview(double x, double y, EnumBannerPattern pattern, int baseRGB, int patternRGB) {
-		GL11.glEnable(GL11.GL_BLEND);
-		GL11.glBlendFunc(GL11.GL_SRC_ALPHA, GL11.GL_ONE_MINUS_SRC_ALPHA);
-		drawBannerFront(BANNER_BASE, x, y, baseRGB);
-		drawBannerFront(new ResourceLocation("textures/entity/banner/" + pattern.getPatternName() + ".png"), x, y, patternRGB);
-		GL11.glDisable(GL11.GL_BLEND);
+	private ResourceLocation composite(List<EnumBannerPattern> patterns, List<EnumColor> colors) {
+		StringBuilder key = new StringBuilder("etfuturum_loom/");
+		List<String> layers = new ArrayList<>();
+		for (int i = 0; i < patterns.size(); i++) {
+			key.append(patterns.get(i).getPatternID()).append(colors.get(i).getDamage()).append('_');
+			layers.add("textures/entity/banner/" + patterns.get(i).getPatternName() + ".png");
+		}
+		return COMPOSITES.computeIfAbsent(key.toString(), k -> {
+			ResourceLocation rl = new ResourceLocation(k);
+			mc.getTextureManager().loadTexture(rl, new LayeredColorMaskTexture(BANNER_BASE, layers, new ArrayList<>(colors)));
+			return rl;
+		});
 	}
 
-	private void drawBannerFront(ResourceLocation texture, double x, double y, int rgb) {
+	/**
+	 * Draws the front face of a banner texture: region (1, 1)-(21, 41) of the 64x64 sheet.
+	 */
+	private void drawBannerFront(ResourceLocation texture, double x, double y, double w, double h) {
+		GL11.glColor4f(1.0F, 1.0F, 1.0F, 1.0F);
 		mc.getTextureManager().bindTexture(texture);
-		GL11.glColor4f((rgb >> 16 & 255) / 255.0F, (rgb >> 8 & 255) / 255.0F, (rgb & 255) / 255.0F, 1.0F);
-		// Front face of the 64x64 banner texture: (1, 1) to (21, 41)
 		double u0 = 1 / 64.0D, v0 = 1 / 64.0D, u1 = 21 / 64.0D, v1 = 41 / 64.0D;
 		Tessellator t = Tessellator.instance;
 		t.startDrawingQuads();
-		t.addVertexWithUV(x, y + 10, zLevel, u0, v1);
-		t.addVertexWithUV(x + 5, y + 10, zLevel, u1, v1);
-		t.addVertexWithUV(x + 5, y, zLevel, u1, v0);
+		t.addVertexWithUV(x, y + h, zLevel, u0, v1);
+		t.addVertexWithUV(x + w, y + h, zLevel, u1, v1);
+		t.addVertexWithUV(x + w, y, zLevel, u1, v0);
 		t.addVertexWithUV(x, y, zLevel, u0, v0);
 		t.draw();
+	}
+
+	private void drawPatternPreview(double x, double y, EnumBannerPattern pattern, EnumColor base, EnumColor dye) {
+		drawBannerFront(composite(Arrays.asList(EnumBannerPattern.BASE, pattern), Arrays.asList(base, dye)), x, y, 5, 10);
+	}
+
+	/**
+	 * The full banner the loom would make, drawn above the output slot.
+	 */
+	private void drawResultPreview(ItemStack result, int x, int y) {
+		List<EnumBannerPattern> patterns = new ArrayList<>();
+		List<EnumColor> colors = new ArrayList<>();
+		patterns.add(EnumBannerPattern.BASE);
+		colors.add(EnumColor.fromDamage(TileEntityBanner.getBaseColor(result)));
+		NBTTagCompound tag = ItemBlockBanner.getSubTag(result, "BlockEntityTag", false);
+		if (tag != null && tag.hasKey("Patterns", 9)) {
+			NBTTagList list = tag.getTagList("Patterns", 10);
+			for (int i = 0; i < list.tagCount(); i++) {
+				EnumBannerPattern p = EnumBannerPattern.getPatternByID(list.getCompoundTagAt(i).getString("Pattern"));
+				if (p != null) {
+					patterns.add(p);
+					colors.add(EnumColor.fromDamage(list.getCompoundTagAt(i).getInteger("Color")));
+				}
+			}
+		}
+		drawBannerFront(composite(patterns, colors), x, y, 20, 40);
 	}
 
 	@Override

@@ -55,7 +55,6 @@ public class ChunkProviderEFREnd implements IChunkProvider {
 	 * are map structures going to be generated (e.g. strongholds)
 	 */
 	private final boolean mapFeaturesEnabled;
-	//    private final MapGenEndCity endCityGen = new MapGenEndCity(this);
 	private final NoiseGeneratorSimplex islandNoise;
 	private double[] buffer;
 
@@ -90,7 +89,6 @@ public class ChunkProviderEFREnd implements IChunkProvider {
 
 //        if (this.mapFeaturesEnabled)
 //        {
-//            this.endCityGen.generate(this.worldObj, x, z, chunkprimer);
 //        }
 
 		Chunk chunk = new Chunk(this.worldObj, ablock, meta, x, z);
@@ -393,7 +391,6 @@ public class ChunkProviderEFREnd implements IChunkProvider {
 		int zPos = z * 16;
 
 		if (this.mapFeaturesEnabled) {
-//            this.endCityGen.generateStructure(this.worldObj, this.rand, new ChunkPos(x, z));
 		}
 
 		this.worldObj.getBiomeGenForCoords(xPos + 16, zPos + 16).decorate(this.worldObj, rand, xPos, zPos);

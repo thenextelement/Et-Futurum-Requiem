@@ -65,6 +65,14 @@ public class ModRecipes {
 			RecipeSorter.register(Tags.MOD_ID + ".RecipeAddPattern", RecipeAddPattern.class, Category.SHAPED, "after:minecraft:shaped");
 		}
 
+		if (ModItems.SHIELD.isEnabled()) {
+			GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.SHIELD.newItemStack(), "wiw", "www", " w ", 'w', "plankWood", 'i', "ingotIron"));
+			if (ConfigBlocksItems.enableBanners) {
+				RecipeSorter.register(Tags.MOD_ID + ".RecipeShieldDecoration", RecipeShieldDecoration.class, Category.SHAPELESS, "after:minecraft:shapeless");
+				GameRegistry.addRecipe(new RecipeShieldDecoration());
+			}
+		}
+
 		modernWoodTypesEnabled[0] = ConfigExperiments.enableCrimsonBlocks;
 		modernWoodTypesEnabled[1] = ConfigExperiments.enableWarpedBlocks;
 		modernWoodTypesEnabled[2] = ConfigExperiments.enableMangroveBlocks;
@@ -1767,6 +1775,14 @@ public class ModRecipes {
 		if (!ConfigExperiments.netherDimensionProvider || ModsList.NETHERLICIOUS.isLoaded() || ModsList.BIOMES_O_PLENTY.isLoaded()) { //A way to get soul soil when our Nether isn't generating it
 			ItemStack output12 = ModBlocks.SOUL_SOIL.newItemStack(5);
 			RecipeHelper.addHighPriorityShapelessRecipe(output12, Blocks.dirt, Blocks.soul_sand, Blocks.soul_sand, Blocks.soul_sand, Blocks.soul_sand);
+		}
+
+		if (ModItems.BANNER_PATTERN.isEnabled()) {
+			Object[] ingredients = {new ItemStack(Blocks.red_flower, 1, 8), new ItemStack(Items.skull, 1, 4), new ItemStack(Items.skull, 1, 1),
+					new ItemStack(Items.golden_apple, 1, 1), Blocks.brick_block, Blocks.vine};
+			for (int i = 0; i < ingredients.length; i++) {
+				RecipeHelper.addHighPriorityShapelessRecipe(ModItems.BANNER_PATTERN.newItemStack(1, i), Items.paper, ingredients[i]);
+			}
 		}
 
 		if (ModBlocks.LIGHTNING_ROD.isEnabled()) {

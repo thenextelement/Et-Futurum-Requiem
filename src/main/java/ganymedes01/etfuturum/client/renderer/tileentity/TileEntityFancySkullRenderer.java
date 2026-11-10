@@ -36,6 +36,10 @@ public class TileEntityFancySkullRenderer extends TileEntitySpecialRenderer {
 	}
 
 	public void renderSkull(float x, float y, float z, int meta, float rotation, int type, GameProfile profile) {
+		if (type == DragonHeadRenderer.TYPE) {
+			DragonHeadRenderer.render(x, y, z, meta, rotation, 0);
+			return;
+		}
 		ModelHead model = model1;
 
 		switch (type) {
@@ -98,6 +102,10 @@ public class TileEntityFancySkullRenderer extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y, double z, float partialTick) {
 		TileEntitySkull skull = (TileEntitySkull) tile;
+		if (skull.func_145904_a() == DragonHeadRenderer.TYPE) {
+			DragonHeadRenderer.render((float) x, (float) y, (float) z, tile.getBlockMetadata() & 7, skull.func_145906_b() * 360 / 16.0F, DragonHeadRenderer.animation(skull, partialTick));
+			return;
+		}
 		renderSkull((float) x, (float) y, (float) z, tile.getBlockMetadata() & 7, skull.func_145906_b()/*getSkullRotation*/ * 360 / 16.0F, skull.func_145904_a()/*getSkullType*/, skull.func_152108_a());
 	}
 }

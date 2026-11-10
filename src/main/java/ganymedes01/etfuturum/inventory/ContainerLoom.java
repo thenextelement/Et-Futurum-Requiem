@@ -1,6 +1,8 @@
 package ganymedes01.etfuturum.inventory;
 
 import ganymedes01.etfuturum.ModBlocks;
+import ganymedes01.etfuturum.ModItems;
+import ganymedes01.etfuturum.items.ItemBannerPattern;
 import ganymedes01.etfuturum.Tags;
 import ganymedes01.etfuturum.blocks.itemblocks.ItemBlockBanner;
 import ganymedes01.etfuturum.core.utils.Utils;
@@ -26,14 +28,14 @@ public class ContainerLoom extends ContainerWorkbenchBase {
 	public static final int MAX_PATTERNS = 6;
 
 	/**
-	 * Patterns that need no pattern item. Like 1.14+, bricks and the curly border are free in the loom.
+	 * Patterns that need no pattern item.
 	 */
 	public static final List<EnumBannerPattern> FREE_PATTERNS;
 
 	static {
 		List<EnumBannerPattern> list = new ArrayList<>();
 		for (EnumBannerPattern p : EnumBannerPattern.VALUES) {
-			if (p != EnumBannerPattern.BASE && p.hasValidCrafting() && (!p.hasCraftingStack() || isFreeItemPattern(p))) {
+			if (p != EnumBannerPattern.BASE && p.hasValidCrafting() && (!p.hasCraftingStack() || !ModItems.BANNER_PATTERN.isEnabled())) {
 				list.add(p);
 			}
 		}
@@ -73,21 +75,12 @@ public class ContainerLoom extends ContainerWorkbenchBase {
 		addPlayerInventory(inv);
 	}
 
-	private static boolean isFreeItemPattern(EnumBannerPattern p) {
-		return p == EnumBannerPattern.BRICKS || p == EnumBannerPattern.CURLY_BORDER;
-	}
-
 	/**
-	 * The pattern unlocked by an item in the pattern slot (the same item its crafting recipe uses).
+	 * The pattern unlocked by a banner pattern item in the pattern slot. Like 1.21.2+, bricks and the curly border need one too.
 	 */
 	public static EnumBannerPattern getItemPattern(ItemStack stack) {
-		if (stack == null) return null;
-		for (EnumBannerPattern p : EnumBannerPattern.VALUES) {
-			if (p.hasCraftingStack() && !isFreeItemPattern(p) && stack.isItemEqual(p.getCraftingStack())) {
-				return p;
-			}
-		}
-		return null;
+		if (stack == null || !ModItems.BANNER_PATTERN.isEnabled() || stack.getItem() != ModItems.BANNER_PATTERN.get()) return null;
+		return ItemBannerPattern.getPattern(stack);
 	}
 
 	public static int getDyeColor(ItemStack stack) {

@@ -26,9 +26,8 @@ public class WorldGenAzaleaTree extends WorldGenAbstractTree {
 			return false;
 		}
 
-		int straight = 4 + rand.nextInt(2);
-		boolean bend = rand.nextBoolean();
-		int bendLength = bend ? 1 + rand.nextInt(2) : 0;
+		int straight = 2 + rand.nextInt(2);
+		int bendLength = rand.nextBoolean() ? 1 : 0;
 		ForgeDirection dir = ForgeDirection.VALID_DIRECTIONS[2 + rand.nextInt(4)];
 		if (y + straight + bendLength + 3 >= world.getHeight()) return false;
 
