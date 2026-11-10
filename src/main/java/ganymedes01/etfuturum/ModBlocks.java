@@ -188,6 +188,7 @@ import ganymedes01.etfuturum.blocks.rawore.modded.BlockRawAdamantium;
 import ganymedes01.etfuturum.client.sound.ModSounds;
 import ganymedes01.etfuturum.compat.ModsList;
 
+import ganymedes01.etfuturum.compat.PrismarineCompat;
 import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.configuration.configs.ConfigEnchantsPotions;
 import ganymedes01.etfuturum.configuration.configs.ConfigEntities;
@@ -209,9 +210,9 @@ import net.minecraft.item.ItemStack;
 
 public enum ModBlocks {
 	STONE(ConfigBlocksItems.enableStones && !ConfigModCompat.disableBaseBountifulStonesOnly, new BlockBountifulStone()),
-	PRISMARINE_BLOCK(ConfigBlocksItems.enablePrismarine, new BaseSubtypesBlock(Material.rock, "prismarine", "prismarine_bricks", "dark_prismarine")
+	PRISMARINE_BLOCK(PrismarineCompat.efrPrismarineEnabled(), new BaseSubtypesBlock(Material.rock, "prismarine", "prismarine_bricks", "dark_prismarine")
 			.setHardness(1.5F).setResistance(10.0F)),
-	SEA_LANTERN(ConfigBlocksItems.enablePrismarine, new BlockSeaLantern()),
+	SEA_LANTERN(PrismarineCompat.efrPrismarineEnabled(), new BlockSeaLantern()),
 	DAYLIGHT_DETECTOR_INVERTED(ConfigBlocksItems.enableInvertedDaylightSensor, new BlockInvertedDaylightDetector(), null),
 	RED_SANDSTONE(ConfigBlocksItems.enableRedSandstone, new BlockRedSandstone(), ItemBlockRedSandstone.class),
 	BROWN_MUSHROOM(ConfigFunctions.enableSilkTouchingMushrooms, new BlockSilkedMushroom(Blocks.brown_mushroom_block, "brown")),
@@ -356,10 +357,10 @@ public enum ModBlocks {
 	DOUBLE_SMOOTH_SANDSTONE_SLAB(ConfigBlocksItems.enableSmoothSandstone, new BlockSmoothSandstoneSlab(0, true)),
 	SMOOTH_RED_SANDSTONE_SLAB(ConfigBlocksItems.enableRedSandstone, new BlockSmoothSandstoneSlab(1, false)),
 	DOUBLE_SMOOTH_RED_SANDSTONE_SLAB(ConfigBlocksItems.enableSmoothSandstone, new BlockSmoothSandstoneSlab(1, true)),
-	PRISMARINE_SLAB(ConfigBlocksItems.enablePrismarine, new BaseSlab(false, Material.rock, "prismarine", "prismarine_bricks", "dark_prismarine")
+	PRISMARINE_SLAB(PrismarineCompat.efrPrismarineEnabled(), new BaseSlab(false, Material.rock, "prismarine", "prismarine_bricks", "dark_prismarine")
 			.setHardness(1.5F).setResistance(6.0F),
 			BaseSlabItemBlock.class),
-	DOUBLE_PRISMARINE_SLAB(ConfigBlocksItems.enablePrismarine, new BaseSlab(true, Material.rock, "prismarine", "prismarine_bricks", "dark_prismarine")
+	DOUBLE_PRISMARINE_SLAB(PrismarineCompat.efrPrismarineEnabled(), new BaseSlab(true, Material.rock, "prismarine", "prismarine_bricks", "dark_prismarine")
 			.setHardness(1.5F).setResistance(6.0F),
 			BaseSlabItemBlock.class),
 	SMOOTH_QUARTZ_SLAB(ConfigBlocksItems.enableSmoothQuartz, new BlockSmoothQuartzSlab(false)),
@@ -395,9 +396,9 @@ public enum ModBlocks {
 	CUT_COPPER_SLAB(ConfigBlocksItems.enableCopper, new BlockCutCopperSlab(false)),
 	DOUBLE_CUT_COPPER_SLAB(ConfigBlocksItems.enableCopper, new BlockCutCopperSlab(true)),
 
-	PRISMARINE_STAIRS(ConfigBlocksItems.enablePrismarine, new BaseStairs(PRISMARINE_BLOCK.get(), 0).setUnlocalizedNameWithPrefix("prismarine")),
-	PRISMARINE_STAIRS_BRICK(ConfigBlocksItems.enablePrismarine, new BaseStairs(PRISMARINE_BLOCK.get(), 1).setUnlocalizedNameWithPrefix("prismarine_brick")),
-	PRISMARINE_STAIRS_DARK(ConfigBlocksItems.enablePrismarine, new BaseStairs(PRISMARINE_BLOCK.get(), 2).setUnlocalizedNameWithPrefix("dark_prismarine")),
+	PRISMARINE_STAIRS(PrismarineCompat.efrPrismarineEnabled(), new BaseStairs(PRISMARINE_BLOCK.get(), 0).setUnlocalizedNameWithPrefix("prismarine")),
+	PRISMARINE_STAIRS_BRICK(PrismarineCompat.efrPrismarineEnabled(), new BaseStairs(PRISMARINE_BLOCK.get(), 1).setUnlocalizedNameWithPrefix("prismarine_brick")),
+	PRISMARINE_STAIRS_DARK(PrismarineCompat.efrPrismarineEnabled(), new BaseStairs(PRISMARINE_BLOCK.get(), 2).setUnlocalizedNameWithPrefix("dark_prismarine")),
 	SMOOTH_SANDSTONE_STAIRS(ConfigBlocksItems.enableSmoothSandstone, new BaseStairs(SMOOTH_SANDSTONE.get(), 0)),
 	SMOOTH_RED_SANDSTONE_STAIRS(ConfigBlocksItems.enableRedSandstone, new BaseStairs(SMOOTH_RED_SANDSTONE.get(), 0)),
 	SMOOTH_QUARTZ_STAIRS(ConfigBlocksItems.enableSmoothQuartz, new BaseStairs(SMOOTH_QUARTZ.get(), 0)),
@@ -443,7 +444,7 @@ public enum ModBlocks {
 			.setHardness(1.5F).setResistance(6.0F)),
 	RED_SANDSTONE_WALL(ConfigBlocksItems.enableRedSandstone, new BaseWall(Material.rock, "red_sandstone")
 			.setHardness(0.8F)),
-	PRISMARINE_WALL(ConfigBlocksItems.enablePrismarine, new BaseWall(Material.rock, "prismarine")
+	PRISMARINE_WALL(PrismarineCompat.efrPrismarineEnabled(), new BaseWall(Material.rock, "prismarine")
 			.setHardness(1.5F).setResistance(10.0F)),
 	RED_NETHER_BRICK_WALL(ConfigBlocksItems.enableNewNetherBricks, new BaseWall( Material.rock, "red_nether_bricks")
 			.setBlockSound(ModSounds.soundNetherBricks).setHardness(2F).setResistance(6F)),

@@ -4,6 +4,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 import ganymedes01.etfuturum.blocks.BlockWoodSign;
 import ganymedes01.etfuturum.compat.ModsList;
 
+import ganymedes01.etfuturum.compat.PrismarineCompat;
 import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.configuration.configs.ConfigEntities;
 import ganymedes01.etfuturum.configuration.configs.ConfigExperiments;
@@ -53,7 +54,7 @@ import net.minecraft.item.ItemStack;
 public enum ModItems {
 	MUTTON_RAW(ConfigBlocksItems.enableMutton, new BaseFood(2, 0.3F, true).setNames("mutton")),
 	MUTTON_COOKED(ConfigBlocksItems.enableMutton, new BaseFood(6, 0.8F, true).setNames("cooked_mutton")),
-	PRISMARINE_SHARD(ConfigBlocksItems.enablePrismarine, new BaseItem("prismarine_shard")),
+	PRISMARINE_SHARD(PrismarineCompat.efrPrismarineEnabled(), new BaseItem("prismarine_shard")),
 	PRISMARINE_CRYSTALS(ConfigBlocksItems.enablePrismarine, new BaseItem("prismarine_crystals")),
 	WOODEN_ARMORSTAND(ConfigBlocksItems.enableArmourStand, new ItemArmorStand()),
 	RABBIT_RAW(ConfigEntities.enableRabbit, new BaseFood(3, 0.3F, true).setNames("rabbit")),
