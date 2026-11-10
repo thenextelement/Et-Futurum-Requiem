@@ -1,5 +1,10 @@
 package ganymedes01.etfuturum.blocks;
 
+import net.minecraft.block.IGrowable;
+import net.minecraft.init.Blocks;
+import ganymedes01.etfuturum.world.generate.decorate.WorldGenAzaleaTree;
+import java.util.Random;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import ganymedes01.etfuturum.EtFuturum;
@@ -22,7 +27,9 @@ import net.minecraftforge.common.EnumPlantType;
 
 import java.util.List;
 
-public class BlockAzalea extends BlockBush implements ISubBlocksBlock {
+public class BlockAzalea extends BlockBush implements ISubBlocksBlock, IGrowable {
+
+	private static final WorldGenAzaleaTree TREE = new WorldGenAzaleaTree(true);
 
 	public IIcon[] sideIcons;
 	public IIcon[] topIcons;
@@ -145,5 +152,33 @@ public class BlockAzalea extends BlockBush implements ISubBlocksBlock {
 	@Override
 	public MapColor getMapColor(int meta) {
 		return MapColor.grassColor;
+	}
+
+	/**
+	 * MCP name: {@code canFertilize}
+	 */
+	@Override
+	public boolean func_149851_a(World world, int x, int y, int z, boolean isClient) {
+		return true;
+	}
+
+	/**
+	 * MCP name: {@code shouldFertilize}
+	 */
+	@Override
+	public boolean func_149852_a(World world, Random rand, int x, int y, int z) {
+		return rand.nextFloat() < 0.45F;
+	}
+
+	/**
+	 * MCP name: {@code fertilize}
+	 */
+	@Override
+	public void func_149853_b(World world, Random rand, int x, int y, int z) {
+		int meta = world.getBlockMetadata(x, y, z);
+		world.setBlock(x, y, z, Blocks.air, 0, 4);
+		if (!TREE.generate(world, rand, x, y, z)) {
+			world.setBlock(x, y, z, this, meta, 4);
+		}
 	}
 }

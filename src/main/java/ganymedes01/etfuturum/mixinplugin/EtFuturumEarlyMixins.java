@@ -5,8 +5,10 @@ import cpw.mods.fml.relauncher.IFMLLoadingPlugin;
 import ganymedes01.etfuturum.Tags;
 import ganymedes01.etfuturum.compat.CompatMisc;
 import ganymedes01.etfuturum.configuration.ConfigBase;
+import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.configuration.configs.ConfigEnchantsPotions;
 import ganymedes01.etfuturum.configuration.configs.ConfigEntities;
+import ganymedes01.etfuturum.configuration.configs.ConfigExperiments;
 import ganymedes01.etfuturum.configuration.configs.ConfigMixins;
 import ganymedes01.etfuturum.configuration.configs.ConfigTweaks;
 import ganymedes01.etfuturum.lib.Reference;
@@ -77,6 +79,14 @@ public class EtFuturumEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoade
 
 		if (ConfigMixins.endPortalFix) {
 			mixins.add("endportal.MixinBlockEndPortal");
+		}
+
+		if (ConfigExperiments.enableLightningRod) {
+			mixins.add("lightningrod.MixinWorldServer");
+		}
+
+		if (ConfigBlocksItems.enableCartographyTable) {
+			mixins.add("cartography.MixinItemMap");
 		}
 
 		if (ConfigMixins.fenceWallConnectFix) {

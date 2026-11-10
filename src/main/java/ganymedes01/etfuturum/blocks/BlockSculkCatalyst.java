@@ -63,6 +63,18 @@ public class BlockSculkCatalyst extends BaseBlock {
 	}
 
 	@Override
+	public void updateTick(World world, int x, int y, int z, Random rand) {
+		if (world.getBlockMetadata(x, y, z) != 0) {
+			world.setBlockMetadataWithNotify(x, y, z, 0, 3);
+		}
+	}
+
+	@Override
+	public int damageDropped(int meta) {
+		return 0;
+	}
+
+	@Override
 	public boolean hasTileEntity(int metadata) {
 		return true;
 	}
