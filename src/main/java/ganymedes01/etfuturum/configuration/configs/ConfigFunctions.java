@@ -157,6 +157,8 @@ public class ConfigFunctions extends ConfigBase {
 	public static boolean enableNewTextures;
 	public static boolean enableLangReplacements;
 	public static boolean enableFillCommand;
+	public static boolean enableBuildCommand;
+	public static boolean enableLocateCommand;
 	public static boolean enableUpdateChecker;
 	public static boolean enableAttackedAtYawFix = true; //Servers should always send the packet, it's up to the client to disable handling of this feature
 	public static boolean enableSubtitles;
@@ -239,6 +241,8 @@ public class ConfigFunctions extends ConfigBase {
 
 		//commands
 		enableFillCommand = getBoolean("enableFillCommand", catCommands, true, "Enable the /fill command.");
+		enableBuildCommand = getBoolean("enableBuildCommand", catCommands, true, "Enable /efrbuild <structure> [rotation] [x y z], which places an Et Futurum structure where you look.");
+		enableLocateCommand = getBoolean("enableLocateCommand", catCommands, true, "Enable /locate structure <id> and /locate biome <id>, like modern Minecraft.\nStructure positions come from the world seed; End cities are found among the ones already generated.");
 
 		enableSubtitles = getBoolean("enableSubtitles", catClient, false, "Enable subtitles");
 		subtitleBlacklist = getString("subtitleBlacklist", catClient, "^(dig\\.*)", "Regex of subtitles to blacklist");
