@@ -2,6 +2,8 @@ package ganymedes01.etfuturum.world;
 
 import cpw.mods.fml.common.IWorldGenerator;
 import ganymedes01.etfuturum.ModBlocks;
+import ganymedes01.etfuturum.compat.ModsList;
+import ganymedes01.etfuturum.compat.PrismarineCompat;
 import ganymedes01.etfuturum.Tags;
 import ganymedes01.etfuturum.blocks.BlockChorusFlower;
 import ganymedes01.etfuturum.configuration.configs.ConfigWorld;
@@ -276,7 +278,7 @@ public class EtFuturumWorldGenerator implements IWorldGenerator {
 				}
 			}
 
-			if (ConfigWorld.enableOceanMonuments && ModBlocks.PRISMARINE_BLOCK.isEnabled() && ModBlocks.SEA_LANTERN.isEnabled()
+			if (ConfigWorld.enableOceanMonuments && !ModsList.VILLAGE_NAMES.isLoaded() && PrismarineCompat.monumentBlocksAvailable()
 					&& !(world.provider instanceof WorldProviderEnd) && !(world.provider instanceof WorldProviderHell)) {
 				if (OceanMonument.canSpawnAt(world, chunkX, chunkZ)) {
 					x = (chunkX << 4) + rand.nextInt(16) + 8;
