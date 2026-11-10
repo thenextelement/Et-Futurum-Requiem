@@ -757,6 +757,7 @@ tile.etfuturum.flowering_azalea_leaves.name=Flowering Azalea Leaves
 
 tile.etfuturum.dripstone_block.name=Dripstone Block
 tile.etfuturum.pointed_dripstone.name=Pointed Dripstone
+tile.etfuturum.lightning_rod.name=Lightning Rod
 
 tile.etfuturum.mangrove_leaves.name=Mangrove Leaves
 tile.etfuturum.cherry_leaves.name=Cherry Leaves
@@ -1947,12 +1948,7 @@ efr.nei.banner=Banners
 efr.nei.amount=Amount
 efr.nei.weight=Weight
 
-efr.decoration.only=Decoration only
 
-efr.warn.experimental=§e§l[WARN]: §rThe following §bEt §bFuturum §bRequiem§r experimental features are enabled: §6[%s§6]
-efr.warn.experimental.bugs=These features may not be stable, click here to report any issues!
-efr.log.experimental=WARNING: The following experimental features are enabled: [%s]
-efr.log.experimental.bugs=Be sure to report bugs at https://github.com/Roadhog360/Et-Futurum-Requiem/issues
 efr.critical.badbetterfpsalgorithm1=§4§l[CRITICAL]: §bBetterFPS §ris configured with a bad math algorithm.
 efr.critical.badbetterfpsalgorithm2="rivens-half" or "taylors" should not be used to prevent damage to your world. It is highly advised that you go into its config and change "algorithm" to something else, preferably "vanilla".
 efr.critical.badbetterfpsalgorithm3=This is being shown to you because the aforementioned math algorithms are buggy and generate incorrect numbers, leading to possible save bricking.
@@ -2255,4 +2251,13 @@ item.etfuturum.simpleores.raw_adamantium.name=Raw Adamantium
 item.etfuturum.tipped_arrow.potion.confusion.name=Arrow of Nausea
 item.etfuturum.tipped_arrow.potion.wither.name=Arrow of Withering
 
+
 # PATRIOTS IN CONTROL  😎 🇺🇸 🦅 #
+
+container.etfuturum.stonecutter=Stonecutter
+container.etfuturum.loom=Loom
+container.etfuturum.cartography_table=Cartography Table
+container.etfuturum.fletching_table=Fletching Table
+container.etfuturum.fletching_table.arrows=Arrows
+container.etfuturum.fletching_table.potion=Potion
+filled_map.etfuturum.locked=Locked

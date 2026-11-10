@@ -77,6 +77,9 @@ public class ConfigWorld extends ConfigBase {
 	public static boolean oldHuskSpawning;
 	public static boolean oldStraySpawning;
 
+	public static boolean enableDripstoneGen;
+	public static int dripstoneGenChance;
+
 	public static final String catClient = "client";
 	public static final String catGeneration = "generation";
 	public static final String catBiomes = "biomes";
@@ -104,6 +107,10 @@ public class ConfigWorld extends ConfigBase {
 		modernLightmapGamma = getBoolean("modernLightmapGamma", catClient, true, "Replaces the vanilla brightness-slider curve with the modern hue and saturation preserving one.");
 		modernBlockLightTint = getBoolean("modernBlockLightTint", catClient, true, "Adjust block light color and gradient to match modern Minecraft.");
 		modernNightVision = getBoolean("modernNightVision", catClient, true, "Adjust night vision to match modern Minecraft.");
+		ConfigExperiments.netherDimensionProvider = getBoolean("netherDimensionProvider", catGeneration, true, "Enables the Nether dimension provider needed for the crimson forest, warped forest, soul sand valley and basalt deltas biomes.\nIt is skipped automatically when another mod already replaced the Nether (Netherlicious, Biomes O' Plenty's Nether, etc.). Netherlicious has compat to generate Et Futurum Requiem biomes with Netherlicious blocks.\nSetting each individual biome ID to -1 prevents that biome from generating.");
+		ConfigExperiments.endDimensionProvider = getBoolean("endDimensionProvider", catGeneration, true, "Enables outer End island generation from 1.9. Each time the Ender Dragon dies an End gateway opens on the main island, leading out to the outer islands.\nIt is skipped automatically when another mod already replaced the End (Hardcore Ender Expansion, etc.).");
+		enableDripstoneGen = getBoolean("enableDripstoneGen", catGeneration, true, "Generates dripstone clusters (dripstone blocks with stalactites and stalagmites) in caves below Y 60. Requires enableDripstone.");
+		dripstoneGenChance = getInt("dripstoneGenChance", catGeneration, 12, 1, 1000, "One in X chunks will try to generate a dripstone cluster.");
 		enableAirDebris = getBoolean("enableAirDebris", catGeneration, false, "Can ancient debris generate next to air?");
 		maxStonesPerCluster = getInt("maxStonesPerCluster", catGeneration, 32, 0, 64, "Max vein size for Granite/Andesite/Diorite blocks in a cluster");
 		smallDebrisMax = getInt("smallDebrisMax", catGeneration, 2, 0, 64, "The max vein size for the first, typically smaller debris veins which generate from Y 8 to 119");

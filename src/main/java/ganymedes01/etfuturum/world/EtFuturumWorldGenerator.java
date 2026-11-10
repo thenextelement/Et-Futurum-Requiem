@@ -15,6 +15,7 @@ import ganymedes01.etfuturum.world.generate.decorate.WorldGenCaveVines;
 import ganymedes01.etfuturum.world.generate.decorate.WorldGenCherryTrees;
 import ganymedes01.etfuturum.world.generate.decorate.WorldGenGlowLichen;
 import ganymedes01.etfuturum.world.generate.decorate.WorldGenPinkPetals;
+import ganymedes01.etfuturum.world.generate.feature.WorldGenDripstoneCluster;
 import ganymedes01.etfuturum.world.generate.feature.WorldGenFossil;
 import ganymedes01.etfuturum.world.generate.feature.WorldGenGeode;
 import ganymedes01.etfuturum.world.structure.OceanMonument;
@@ -63,6 +64,7 @@ public class EtFuturumWorldGenerator implements IWorldGenerator {
 
 	protected WorldGenerator amethystGen;
 	protected WorldGenerator fossilGen;
+	protected WorldGenerator dripstoneGen;
 	protected WorldGenerator berryBushGen;
 	protected WorldGenerator cornflowerGen;
 	protected WorldGenerator lilyValleyGen;
@@ -108,6 +110,10 @@ public class EtFuturumWorldGenerator implements IWorldGenerator {
 			fossilBiomesArray = Utils.excludeBiomesFromTypes(fossilBiomesArray, Type.NETHER, Type.END);
 			fossilBiomes = Arrays.asList(fossilBiomesArray);
 			fossilGen = new WorldGenFossil();
+		}
+
+		if (ConfigWorld.enableDripstoneGen && ModBlocks.POINTED_DRIPSTONE.isEnabled() && ModBlocks.DRIPSTONE_BLOCK.isEnabled()) {
+			dripstoneGen = new WorldGenDripstoneCluster();
 		}
 
 		if (ModBlocks.SWEET_BERRY_BUSH.isEnabled()) {
@@ -301,6 +307,12 @@ public class EtFuturumWorldGenerator implements IWorldGenerator {
 				if (y > 0 && mudBiomes.contains(world.getBiomeGenForCoords(x, z))) {
 					mudGen.generate(world, rand, x, world.getTopSolidOrLiquidBlock(x, z), z);
 				}
+			}
+
+			if (dripstoneGen != null && world.provider.dimensionId == 0 && rand.nextInt(ConfigWorld.dripstoneGenChance) == 0) {
+				x = (chunkX << 4) + rand.nextInt(16) + 8;
+				z = (chunkZ << 4) + rand.nextInt(16) + 8;
+				dripstoneGen.generate(world, rand, x, MathHelper.getRandomIntegerInRange(rand, 10, 60), z);
 			}
 
 			if (fossilGen != null && rand.nextInt(64) == 0 && ArrayUtils.contains(ConfigWorld.fossilDimensionBlacklist, world.provider.dimensionId) == ConfigWorld.fossilDimensionBlacklistAsWhitelist) {

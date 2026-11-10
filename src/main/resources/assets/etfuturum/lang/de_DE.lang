@@ -1590,7 +1590,6 @@ efr.nei.banner=Banner
 efr.nei.amount=Menge
 efr.nei.weight=Gewicht
 				   
-efr.decoration.only=Nur Dekoration
 
 efr.warn.prerelease.version=§c§l[Debug]: §rDu benutzt eine Pre-Release-Version von §bEt §bFuturum §bRequiem§r. Diese Version könnte instabil sein, klicke hier, um auf GitHub Fehler zu melden.
 efr.log.prerelease.version=WARNUNG: Eine Pre-Release-Version von Et Futurum Requiem wird benutzt! Diese Instanz könnte instabil sein, erwarte mehr Fehler als üblich.

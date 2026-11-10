@@ -1293,8 +1293,12 @@ public class ModRecipes {
 
 		addShapelessRecipe(new ItemStack(Items.dye, 1, 9), ModBlocks.PINK_PETALS.get());
 
-		if (!ConfigExperiments.netherDimensionProvider) { //A way to get soul soil without new Nether
+		if (!ConfigExperiments.netherDimensionProvider || ModsList.NETHERLICIOUS.isLoaded() || ModsList.BIOMES_O_PLENTY.isLoaded()) { //A way to get soul soil when our Nether isn't generating it
 			addShapelessRecipe(ModBlocks.SOUL_SOIL.newItemStack(5), Blocks.dirt, Blocks.soul_sand, Blocks.soul_sand, Blocks.soul_sand, Blocks.soul_sand);
+		}
+
+		if (ModBlocks.LIGHTNING_ROD.isEnabled()) {
+			RecipeHelper.addHighPriorityShapedRecipe(ModBlocks.LIGHTNING_ROD.newItemStack(), "X", "X", "X", 'X', "ingotCopper");
 		}
 
 		if (ConfigModCompat.moddedDeepslateOres) { //OreDict-based registration is only used when mod support is enabled

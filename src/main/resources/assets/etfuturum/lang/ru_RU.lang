@@ -1636,7 +1636,6 @@ efr.nei.banner=Флаг
 efr.nei.amount=Количество
 efr.nei.weight=Вес
 
-efr.decoration.only=Только декоративный
 
 efr.warn.prerelease.version=§c§l[Отладка]: §rВы используете предварительную версию §bEt §bFuturum §bRequiem§r. Эта версия может быть нестабильной. Нажмите здесь, чтобы перейти на GitHub и сообщить об ошибках.
 efr.log.prerelease.version=ВНИМАНИЕ: используется предварительная версия Et Futurum Requiem! Эта сборка может быть нестабильной, ожидайте больше ошибок, чем обычно.

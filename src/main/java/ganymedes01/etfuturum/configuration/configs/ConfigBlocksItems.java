@@ -207,9 +207,9 @@ public class ConfigBlocksItems extends ConfigBase {
 		enableDeepslateOres = getBoolean("enableDeepslateOres", catBlockNatural, true, "Enable deepslate ores for copper ore and vanilla ores when deepslate generates over them.");
 		enableAmethyst = getBoolean("enableAmethyst", catBlockNatural, true, "Enables tinted glass, amethyst blocks, budding amethyst and amethyst crystals. Also enables the item too.");
 		enableMud = getBoolean("enableMud", catBlockNatural, true, "Enables mud, packed mud and mud bricks, as well as the mud brick stairs, slabs and walls.");
-//		enableMoss = getBoolean("enableMoss", catBlockNatural, true, "Enables moss blocks and carpets");
-//		enableCrimsonBlocks = getBoolean("enableCrimsonBlocks", catBlockMisc, true, "Enables the crimson nylium, wood, and plants. This must be on for the crimson forest biome to generate unless Netherlicious is installed.\nThe nether wart block is still a separate toggle, both this and the wart toggle must be turned off to disable the nether wart block, because crimson trees need the wart blocks.");
-//		enableWarpedBlocks = getBoolean("enableWarpedBlocks", catBlockMisc, true, "Enables the warped nylium, wood, and plants. This must be on for the warped forest biome to generate unless Netherlicious is installed.");
+		ConfigExperiments.enableMossAzalea = getBoolean("enableMossAzalea", catBlockNatural, true, "Enables moss blocks, moss carpets, azalea and flowering azalea. Bonemealing an azalea grows an azalea tree.");
+		ConfigExperiments.enableCrimsonBlocks = getBoolean("enableCrimsonBlocks", catBlockMisc, true, "Enables the crimson nylium, wood, and plants. This must be on for the crimson forest biome to generate unless Netherlicious is installed.\nThe nether wart block is still a separate toggle, both this and the wart toggle must be turned off to disable the nether wart block, because crimson trees need the wart blocks.");
+		ConfigExperiments.enableWarpedBlocks = getBoolean("enableWarpedBlocks", catBlockMisc, true, "Enables the warped nylium, wood, and plants. This must be on for the warped forest biome to generate unless Netherlicious is installed.");
 		enableBlackstone = getBoolean("enableBlackstone", catBlockMisc, true, "This must be on for the basalt deltas biome to generate unless Netherlicious is installed.");
 		enableSoulSoil = getBoolean("enableSoulSoil", catBlockNatural, true, "Not required for the Soul Sand Valley to generate.");
 		enableSoulLighting = getBoolean("enableSoulLighting", catBlockNatural, true, "Soul torches and soul lanterns.");
@@ -234,14 +234,17 @@ public class ConfigBlocksItems extends ConfigBase {
 			ConfigExperiments.enableCrimsonBlocks = ConfigExperiments.enableWarpedBlocks = enableNetherwartBlock = enableBlackstone = enableSoulSoil = enableSoulLighting = enableBasalt = false;
 		}
 
-//		enableMangroveBlocks = getBoolean("enableMangroveBlocks", catBlockNatural, true, "Enables mangrove wood and all of its wood subtypes, and the roots (+ muddy versions).");
+		ConfigExperiments.enableMangroveBlocks = getBoolean("enableMangroveBlocks", catBlockNatural, true, "Enables mangrove wood and all of its wood subtypes, mangrove saplings (which grow into mangrove trees), and the roots (+ muddy versions).");
 		enableCherryBlocks = getBoolean("enableCherryBlocks", catBlockNatural, true, "Enables cherry wood and all of its wood subtypes.");
 		enableBambooBlocks = getBoolean("enableBambooBlocks", catBlockNatural, true, "Enables bamboo wood and all of its wood subtypes, including the bamboo stalks themselves.");
 
 		// Check if we enable wood variants at all. Used by blocks where all the wood is 1 ID
 		woodVariants = ConfigExperiments.enableCrimsonBlocks || ConfigExperiments.enableWarpedBlocks || ConfigExperiments.enableMangroveBlocks || enableCherryBlocks || enableBambooBlocks;
 
-//		enableSculk = getBoolean("enableSculk", catBlockNatural, true, "Enables sculk-related blocks.");
+		ConfigExperiments.enableSculk = getBoolean("enableSculk", catBlockNatural, true, "Enables sculk and the sculk catalyst. Mobs that die near a catalyst spread sculk around them instead of dropping experience.");
+		ConfigExperiments.enableDripstone = getBoolean("enableDripstone", catBlockNatural, true, "Enables dripstone blocks and pointed dripstone. Pointed dripstone drips, grows, falls when unsupported, hurts entities landing on it and fills cauldrons below it. Generation is controlled in world.cfg.");
+		ConfigExperiments.enableLightningRod = getBoolean("enableLightningRod", catBlockFunc, true, "Enables the lightning rod. It attracts lightning strikes within 128 blocks during thunderstorms and emits a redstone signal when struck.");
+		ConfigExperiments.enableBubbleColumns = getBoolean("enableBubbleColumns", catBlockFunc, true, "Enables bubble columns. Soul sand under water pushes entities up, magma blocks pull them down.");
 
 		//Function Blocks
 		enableIronTrapdoor = getBoolean("enableIronTrapdoor", catBlockFunc, true, "");

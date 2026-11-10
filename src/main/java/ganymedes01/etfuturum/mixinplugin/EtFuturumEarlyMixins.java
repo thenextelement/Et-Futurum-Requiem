@@ -8,6 +8,7 @@ import ganymedes01.etfuturum.configuration.ConfigBase;
 import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.configuration.configs.ConfigEnchantsPotions;
 import ganymedes01.etfuturum.configuration.configs.ConfigEntities;
+import ganymedes01.etfuturum.configuration.configs.ConfigExperiments;
 import ganymedes01.etfuturum.configuration.configs.ConfigMixins;
 import ganymedes01.etfuturum.configuration.configs.ConfigTweaks;
 import ganymedes01.etfuturum.configuration.configs.ConfigWorld;
@@ -83,6 +84,14 @@ public class EtFuturumEarlyMixins implements IFMLLoadingPlugin, IEarlyMixinLoade
 			if (side == MixinEnvironment.Side.CLIENT) {
 				mixins.add("boatcamera.client.MixinEntity");
 			}
+		}
+
+		if (ConfigExperiments.enableLightningRod) {
+			mixins.add("lightningrod.MixinWorldServer");
+		}
+
+		if (ConfigBlocksItems.enableCartographyTable) {
+			mixins.add("cartography.MixinItemMap");
 		}
 
 		if (ConfigMixins.fenceWallConnectFix) {

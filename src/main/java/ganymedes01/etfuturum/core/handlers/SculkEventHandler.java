@@ -82,8 +82,11 @@ public class SculkEventHandler {
 				e.printStackTrace();
 				return;
 			}
-			// Make the catalyst bloom
-			catalyst.bloomWithExperience(experience);
+			// Like vanilla, only mobs that would have dropped experience (killed by a player) feed the catalyst
+			int recentlyHit = ReflectionHelper.getPrivateValue(EntityLivingBase.class, event.entityLiving, "recentlyHit", "field_70718_bc");
+			if (recentlyHit <= 0 || experience <= 0)
+				return;
+			catalyst.bloomWithExperience(experience, event.entityLiving.posX, event.entityLiving.posY, event.entityLiving.posZ);
 			sculkAffectedEntities.add(event.entityLiving);
 		}
 	}

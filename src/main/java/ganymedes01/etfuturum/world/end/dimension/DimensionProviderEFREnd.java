@@ -1,24 +1,16 @@
 package ganymedes01.etfuturum.world.end.dimension;
 
-import net.minecraftforge.common.DimensionManager;
+import ganymedes01.etfuturum.world.DimensionOverrideHelper;
+import net.minecraft.world.WorldProviderEnd;
 
 public class DimensionProviderEFREnd {
 
+	/**
+	 * True once our provider is actually registered for the End. False when e.g. Hardcore Ender Expansion owns the End.
+	 */
+	public static boolean active;
+
 	public static void init() {
-		unregisterProviders();
-		registerProviders();
-		registerDimensions();
+		active = DimensionOverrideHelper.overrideIfVanilla(1, WorldProviderEnd.class, WorldProviderEFREnd.class, "the Et Futurum End dimension provider");
 	}
-
-	private static void unregisterProviders() {
-		DimensionManager.unregisterProviderType(1);
-	}
-
-	private static void registerProviders() {
-		DimensionManager.registerProviderType(1, WorldProviderEFREnd.class, true);
-	}
-
-	private static void registerDimensions() {
-	}
-
 }
