@@ -62,7 +62,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.42")
     compileOnly('org.jetbrains:annotations:24.0.1')
 
-    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.12.6-GTNH:dev") {
+    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.12.13-GTNH:dev") {
         transitive = false
     }
 
@@ -70,7 +70,7 @@ dependencies {
         transitive = false
     }
 
-    compileOnly("com.github.GTNewHorizons:lwjgl3ify:2.1.2:api") {
+    compileOnly("com.github.GTNewHorizons:lwjgl3ify:2.1.5:api") {
         transitive = false
     }
 
