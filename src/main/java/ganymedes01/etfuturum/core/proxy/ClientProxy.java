@@ -114,6 +114,7 @@ public class ClientProxy extends CommonProxy {
 		RenderingRegistry.registerBlockHandler(new BlockLoomRenderer(RenderIDs.LOOM));
 		RenderingRegistry.registerBlockHandler(new BlockAmethystClusterRenderer(RenderIDs.AMETHYST_CLUSTER));
 		RenderingRegistry.registerBlockHandler(new BlockPointedDripstoneRenderer(RenderIDs.POINTED_DRIPSTONE));
+		RenderingRegistry.registerBlockHandler(new BlockLightningRodRenderer(RenderIDs.LIGHTNING_ROD));
 		RenderingRegistry.registerBlockHandler(new BlockColoredWaterCauldronRenderer(RenderIDs.COLORED_CAULDRON));
 		RenderingRegistry.registerBlockHandler(new BlockChestRenderer());
 		RenderingRegistry.registerBlockHandler(new BlockObserverRenderer(RenderIDs.OBSERVER));
@@ -151,9 +152,7 @@ public class ClientProxy extends CommonProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityPig.class, new TechnobladeCrownRenderer());
 
-//      {
-//          RenderingRegistry.registerEntityRenderingHandler(EntityFallingDripstone.class, new FallingDripstoneRenderer());
-//      }
+		RenderingRegistry.registerEntityRenderingHandler(EntityFallingDripstone.class, new FallingDripstoneRenderer());
 
 		if (ConfigFunctions.enablePlayerSkinOverlay) {
 			TextureManager texManager = Minecraft.getMinecraft().renderEngine;

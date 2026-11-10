@@ -40,6 +40,7 @@ import ganymedes01.etfuturum.spectator.SpectatorMode;
 import ganymedes01.etfuturum.world.EtFuturumEarlyWorldGenerator;
 import ganymedes01.etfuturum.world.EtFuturumLateWorldGenerator;
 import ganymedes01.etfuturum.world.EtFuturumWorldGenerator;
+import ganymedes01.etfuturum.world.end.EndGatewaySpawner;
 import ganymedes01.etfuturum.world.end.dimension.DimensionProviderEFREnd;
 import ganymedes01.etfuturum.world.nether.biome.utils.NetherBiomeManager;
 import ganymedes01.etfuturum.world.nether.dimension.DimensionProviderEFRNether;
@@ -47,6 +48,7 @@ import ganymedes01.etfuturum.world.structure.OceanMonument;
 import makamys.mclib.core.MCLib;
 import makamys.mclib.core.MCLibModules;
 import makamys.mclib.ext.assetdirector.ADConfig;
+import ganymedes01.etfuturum.client.gui.modern.ModernGuiTextures;
 import makamys.mclib.ext.assetdirector.AssetDirectorAPI;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTrapDoor;
@@ -164,6 +166,10 @@ public class EtFuturum {
 		ADConfig config = new ADConfig();
 
 		getSounds(config);
+		if (ConfigBlocksItems.enableStonecutter || ConfigBlocksItems.enableLoom || ConfigBlocksItems.enableCartographyTable) {
+			// Container GUI textures are read from Mojang's own client jar at runtime
+			config.addJar(ModernGuiTextures.ASSET_VERSION);
+		}
 
 		AssetDirectorAPI.register(config);
 
@@ -422,7 +428,10 @@ public class EtFuturum {
 		}
 
 		if (ConfigExperiments.endDimensionProvider) {
-			DimensionProviderEFREnd.init(); // Come back to
+			DimensionProviderEFREnd.init();
+			if (DimensionProviderEFREnd.active) {
+				MinecraftForge.EVENT_BUS.register(EndGatewaySpawner.INSTANCE);
+			}
 		}
 	}
 
@@ -768,6 +777,10 @@ public class EtFuturum {
 		config.addSoundEvent(ver, "block.smithing_table.use", "player");
 		config.addSoundEvent(ver, "block.enchantment_table.use", "player");
 		config.addSoundEvent(ver, "block.beacon.activate", "block");
+		config.addSoundEvent(ver, "block.sculk_catalyst.bloom", "block");
+		config.addSoundEvent(ver, "ui.stonecutter.take_result", "block");
+		config.addSoundEvent(ver, "ui.loom.take_result", "block");
+		config.addSoundEvent(ver, "ui.cartography_table.take_result", "block");
 		config.addSoundEvent(ver, "block.beacon.ambient", "block");
 		config.addSoundEvent(ver, "block.beacon.deactivate", "block");
 		config.addSoundEvent(ver, "block.beacon.power_select", "block");

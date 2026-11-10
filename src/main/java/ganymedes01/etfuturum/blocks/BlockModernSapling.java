@@ -6,6 +6,7 @@ import ganymedes01.etfuturum.EtFuturum;
 import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.configuration.configs.ConfigExperiments;
 import ganymedes01.etfuturum.world.generate.decorate.WorldGenCherryTrees;
+import ganymedes01.etfuturum.world.generate.decorate.WorldGenMangroveTree;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockSapling;
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -54,6 +55,7 @@ public class BlockModernSapling extends BlockSapling implements ISubBlocksBlock 
 	}
 
 	private static final WorldGenAbstractTree cherry = new WorldGenCherryTrees(true);
+	private static final WorldGenAbstractTree mangrove = new WorldGenMangroveTree(true);
 
 	/**
 	 * MCP name: {@code growTree}
@@ -68,6 +70,11 @@ public class BlockModernSapling extends BlockSapling implements ISubBlocksBlock 
 		WorldGenAbstractTree tree = null;
 
 		switch (l) {
+			case 0:
+				if (ConfigExperiments.enableMangroveBlocks) {
+					tree = mangrove;
+				}
+				break;
 			case 1:
 				if (ConfigBlocksItems.enableCherryBlocks) {
 					tree = cherry;

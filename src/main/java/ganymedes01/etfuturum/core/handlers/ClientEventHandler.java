@@ -53,8 +53,6 @@ import net.minecraft.client.resources.I18n;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.passive.EntityHorse;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.event.ClickEvent;
-import net.minecraft.event.ClickEvent.Action;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -73,6 +71,7 @@ import net.minecraftforge.event.entity.EntityJoinWorldEvent;
 import net.minecraftforge.event.entity.PlaySoundAtEntityEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
+import ganymedes01.etfuturum.core.utils.MapLocking;
 import org.apache.commons.lang3.tuple.MutablePair;
 import org.lwjgl.input.Keyboard;
 import org.lwjgl.opengl.GL11;
@@ -88,7 +87,6 @@ public class ClientEventHandler {
 	public static final ClientEventHandler INSTANCE = new ClientEventHandler();
 	private final Minecraft mc = FMLClientHandler.instance().getClient();
 	private final Random rand = new FastRandom();
-	private boolean showedDebugWarning;
 	private int currPage;
 	/**
 	 * Represents the two values that govern the last chime age in 1.17 and up.
@@ -102,7 +100,6 @@ public class ClientEventHandler {
 	 */
 	private static final ItemStack STORAGE_STACK = new ItemStack((Item) null, 1, 0);
 
-	private static final boolean forceHideSnapshotWarning = Boolean.parseBoolean(System.getProperty("etfuturum.hideSnapshotWarning"));
 
 
 	private ClientEventHandler() {
@@ -146,20 +143,6 @@ public class ClientEventHandler {
 		}
 
 		if (player.ticksExisted == 40) {
-			if (!Reference.DEV_ENVIRONMENT && !ConfigExperiments.getEnabledElements().isEmpty() && !showedDebugWarning) {
-				if (!forceHideSnapshotWarning && !Reference.TESTING) {
-					ChatComponentText text = new ChatComponentText(I18n.format("efr.warn.experimental", ConfigExperiments.buildLoadedExperimentsList(true)));
-					player.addChatComponentMessage(text);
-					text = new ChatComponentText(I18n.format("efr.warn.experimental.bugs"));
-					text.getChatStyle().setColor(EnumChatFormatting.AQUA);
-					text.getChatStyle().setChatClickEvent(new ClickEvent(Action.OPEN_URL, "https://github.com/Roadhog360/Et-Futurum-Requiem/issues"));
-					player.addChatComponentMessage(text);
-				} else {
-					Logger.warn(I18n.format("efr.log.experimental", ConfigExperiments.buildLoadedExperimentsList(false)));
-					Logger.warn(I18n.format("efr.log.experimental.bugs"));
-				}
-				showedDebugWarning = true;
-			}
 			if (ModItems.ELYTRA.isEnabled() && Utils.badBetterFPSAlgorithm()) {
 				ChatComponentText text = new ChatComponentText(I18n.format("efr.critical.badbetterfpsalgorithm1") +
 						I18n.format("efr.critical.badbetterfpsalgorithm2") +
@@ -334,6 +317,9 @@ public class ClientEventHandler {
 
 	@SubscribeEvent
 	public void toolTipEvent(ItemTooltipEvent event) {
+		if (MapLocking.isLocked(event.itemStack)) {
+			event.toolTip.add(1, EnumChatFormatting.GRAY + I18n.format("filled_map.etfuturum.locked"));
+		}
 //		if (event.itemStack.getItem() instanceof ItemBlock) {
 //			DummyWorld dummyWorld = DummyWorld.getGlobalInstance();
 //			try {
@@ -790,7 +776,6 @@ public class ClientEventHandler {
 	@SubscribeEvent
 	public void openMainMenu(GuiOpenEvent event) {
 		if (event.gui instanceof GuiMainMenu) {
-			this.showedDebugWarning = false;
 			if (Reference.launchConfigWarning && main_menu_display_count++ < 20) {
 				Reference.launchConfigWarning = false;
 				Configuration oldConfig = new Configuration(new File(Launch.minecraftHome, ConfigBase.configDir + "etfuturum.cfg"));
