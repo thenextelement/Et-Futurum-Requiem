@@ -14,6 +14,7 @@ public enum ModsList {
 	PROJECT_RED_EXPLORATION("ProjRed|Exploration"),
 	NETHERITEPLUS("netheriteplus"),
 	BOTANIA("Botania"),
+	VILLAGE_NAMES("VillageNames"),
 	HARDCORE_ENDER_EXPANSION("HardcoreEnderExpansion"),
 	INDUSTRIAL_CRAFT_2("IC2"),
 	SKINPORT("skinport"),

@@ -2,6 +2,7 @@ package ganymedes01.etfuturum.world.structure;
 
 import ganymedes01.etfuturum.EtFuturum;
 import ganymedes01.etfuturum.ModBlocks;
+import ganymedes01.etfuturum.compat.PrismarineCompat;
 import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.world.WorldCoord;
 import net.minecraft.block.Block;
@@ -64,11 +65,11 @@ public class OceanMonument {
 				case 0:
 				case 1:
 				case 2:
-					block = ModBlocks.PRISMARINE_BLOCK.get();
+					block = PrismarineCompat.prismarineBlock();
 					meta = value;
 					break;
 				case 3:
-					block = ModBlocks.SEA_LANTERN.get();
+					block = PrismarineCompat.seaLantern();
 					break;
 				case 4:
 					block = Blocks.gold_block;
@@ -87,11 +88,11 @@ public class OceanMonument {
 		}
 
 		for (int i = 0; i < 7; i++) {
-			generatePillar(world, x + 5 * i + 4 * i, y, z, ModBlocks.PRISMARINE_BLOCK.get(), 1);
-			generatePillar(world, x, y, z + 5 * i + 4 * i, ModBlocks.PRISMARINE_BLOCK.get(), 1);
-			generatePillar(world, x + 54, y, z + 5 * i + 4 * i, ModBlocks.PRISMARINE_BLOCK.get(), 1);
+			generatePillar(world, x + 5 * i + 4 * i, y, z, PrismarineCompat.prismarineBlock(), 1);
+			generatePillar(world, x, y, z + 5 * i + 4 * i, PrismarineCompat.prismarineBlock(), 1);
+			generatePillar(world, x + 54, y, z + 5 * i + 4 * i, PrismarineCompat.prismarineBlock(), 1);
 			if (i != 3)
-				generatePillar(world, x + 5 * i + 4 * i, y, z + 54, ModBlocks.PRISMARINE_BLOCK.get(), 1);
+				generatePillar(world, x + 5 * i + 4 * i, y, z + 54, PrismarineCompat.prismarineBlock(), 1);
 		}
 	}
 
@@ -130,9 +131,9 @@ public class OceanMonument {
 						int meta = world.getBlockMetadata(x + i, y + j, z + k);
 
 						String s = "(" + i + ", " + j + ", " + k + ") - ";
-						if (b == ModBlocks.PRISMARINE_BLOCK.get())
+						if (b == PrismarineCompat.prismarineBlock())
 							s += meta;
-						else if (b == ModBlocks.SEA_LANTERN.get())
+						else if (b == PrismarineCompat.seaLantern())
 							s += 3;
 						else if (b == Blocks.gold_block)
 							s += 4;
