@@ -1,6 +1,6 @@
 package ganymedes01.etfuturum.inventory;
 
-import ganymedes01.etfuturum.Tags;
+import ganymedes01.etfuturum.lib.Reference;
 import ganymedes01.etfuturum.core.utils.MapLocking;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -102,7 +102,7 @@ public class ContainerCartographyTable extends ContainerWorkbenchBase {
 	protected void onTakeResult(EntityPlayer player, ItemStack result) {
 		inputs.decrStackSize(0, 1);
 		inputs.decrStackSize(1, 1);
-		playSound(Tags.MC_ASSET_VER + ":ui.cartography_table.take_result");
+		playSound(Reference.MCAssetVer + ":ui.cartography_table.take_result");
 	}
 
 	@Override

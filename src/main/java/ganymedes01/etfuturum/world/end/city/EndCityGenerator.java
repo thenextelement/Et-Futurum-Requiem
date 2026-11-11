@@ -25,7 +25,15 @@ import net.minecraft.world.chunk.Chunk;
 import net.minecraft.world.chunk.IChunkProvider;
 import net.minecraftforge.event.world.ChunkEvent;
 
-import java.util.*;
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.Deque;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Random;
+import java.util.Set;
 
 /**
  * End city generation for dimension 1 that works whichever mod owns the End (EFR's provider, Hardcore Ender

@@ -1,5 +1,8 @@
 package ganymedes01.etfuturum;
 
+import ganymedes01.etfuturum.configuration.configs.ConfigWorld;
+import cpw.mods.fml.common.FMLCommonHandler;
+import net.minecraftforge.common.MinecraftForge;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -42,6 +45,7 @@ import ganymedes01.etfuturum.command.CommandBuild;
 import ganymedes01.etfuturum.command.CommandFill;
 
 import ganymedes01.etfuturum.compat.CompatBaublesExpanded;
+import ganymedes01.etfuturum.compat.CompatBackhand;
 import ganymedes01.etfuturum.compat.CompatMisc;
 import ganymedes01.etfuturum.compat.CompatRPLEEventHandler;
 import ganymedes01.etfuturum.compat.CompatTinkersConstruct;
@@ -49,7 +53,6 @@ import ganymedes01.etfuturum.compat.CompatWaila;
 import ganymedes01.etfuturum.compat.ExternalContent;
 import ganymedes01.etfuturum.compat.ModsList;
 import ganymedes01.etfuturum.command.CommandLocate;
-import ganymedes01.etfuturum.compat.*;
 import ganymedes01.etfuturum.configuration.ConfigBase;
 
 import ganymedes01.etfuturum.configuration.configs.ConfigEntities;

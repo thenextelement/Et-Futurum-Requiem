@@ -1,7 +1,7 @@
 package ganymedes01.etfuturum.tileentities;
 
+import ganymedes01.etfuturum.lib.Reference;
 import ganymedes01.etfuturum.ModBlocks;
-import ganymedes01.etfuturum.Tags;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.tileentity.TileEntity;
@@ -31,7 +31,7 @@ public class TileEntitySculkCatalyst extends TileEntity {
 
 		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 		worldObj.scheduleBlockUpdate(xCoord, yCoord, zCoord, getBlockType(), BLOOM_TICKS);
-		worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, Tags.MC_ASSET_VER + ":block.sculk_catalyst.bloom", 2.0F, 0.6F + worldObj.rand.nextFloat() * 0.4F);
+		worldObj.playSoundEffect(xCoord + 0.5D, yCoord + 0.5D, zCoord + 0.5D, Reference.MCAssetVer + ":block.sculk_catalyst.bloom", 2.0F, 0.6F + worldObj.rand.nextFloat() * 0.4F);
 	}
 
 	private static void spread(World world, Random rand, int ox, int oy, int oz, int charge) {

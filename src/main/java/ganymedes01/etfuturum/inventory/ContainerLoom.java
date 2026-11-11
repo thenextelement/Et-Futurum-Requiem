@@ -1,9 +1,9 @@
 package ganymedes01.etfuturum.inventory;
 
+import ganymedes01.etfuturum.lib.Reference;
 import ganymedes01.etfuturum.ModBlocks;
 import ganymedes01.etfuturum.ModItems;
 import ganymedes01.etfuturum.items.ItemBannerPattern;
-import ganymedes01.etfuturum.Tags;
 import ganymedes01.etfuturum.blocks.itemblocks.ItemBlockBanner;
 import ganymedes01.etfuturum.core.utils.Utils;
 import ganymedes01.etfuturum.lib.EnumColor;
@@ -158,7 +158,7 @@ public class ContainerLoom extends ContainerWorkbenchBase {
 	protected void onTakeResult(EntityPlayer player, ItemStack result) {
 		inputs.decrStackSize(0, 1);
 		inputs.decrStackSize(1, 1);
-		playSound(Tags.MC_ASSET_VER + ":ui.loom.take_result");
+		playSound(Reference.MCAssetVer + ":ui.loom.take_result");
 	}
 
 	@Override

@@ -1,5 +1,9 @@
 package ganymedes01.etfuturum.core.proxy;
 
+import ganymedes01.etfuturum.client.renderer.item.ItemShieldRenderer;
+import ganymedes01.etfuturum.client.renderer.block.BlockLightningRodRenderer;
+import ganymedes01.etfuturum.entities.EntityFallingDripstone;
+import ganymedes01.etfuturum.client.renderer.entity.FallingDripstoneRenderer;
 import com.mojang.authlib.minecraft.MinecraftSessionService;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.client.registry.ClientRegistry;

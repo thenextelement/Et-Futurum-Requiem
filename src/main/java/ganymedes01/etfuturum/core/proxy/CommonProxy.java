@@ -1,5 +1,15 @@
 package ganymedes01.etfuturum.core.proxy;
 
+import ganymedes01.etfuturum.tileentities.TileEntityLightningRod;
+import ganymedes01.etfuturum.entities.EntityFallingDripstone;
+import ganymedes01.etfuturum.inventory.ContainerStonecutter;
+import ganymedes01.etfuturum.inventory.ContainerLoom;
+import ganymedes01.etfuturum.inventory.ContainerCartographyTable;
+import ganymedes01.etfuturum.inventory.ContainerFletchingTable;
+import ganymedes01.etfuturum.client.gui.inventory.GuiStonecutter;
+import ganymedes01.etfuturum.client.gui.inventory.GuiLoom;
+import ganymedes01.etfuturum.client.gui.inventory.GuiCartographyTable;
+import ganymedes01.etfuturum.client.gui.inventory.GuiFletchingTable;
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.IGuiHandler;

@@ -1,8 +1,8 @@
 package ganymedes01.etfuturum.core.handlers;
 
+import ganymedes01.etfuturum.lib.Reference;
 import cpw.mods.fml.common.eventhandler.EventPriority;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
-import ganymedes01.etfuturum.Tags;
 import ganymedes01.etfuturum.compat.CompatBackhand;
 import ganymedes01.etfuturum.items.equipment.ItemShield;
 import net.minecraft.entity.Entity;
@@ -52,7 +52,7 @@ public class ShieldHandler {
 		event.setCanceled(true);
 
 		ItemStack shield = getActiveShield(player);
-		player.worldObj.playSoundAtEntity(player, Tags.MC_ASSET_VER + ":item.shield.block", 1.0F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
+		player.worldObj.playSoundAtEntity(player, Reference.MCAssetVer + ":item.shield.block", 1.0F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
 
 		Entity direct = event.source.getSourceOfDamage();
 		if (direct instanceof EntityLivingBase attacker) {
@@ -61,7 +61,7 @@ public class ShieldHandler {
 			if (weapon != null && weapon.getItem() instanceof ItemAxe) {
 				ItemShield.disable(shield, player.worldObj, AXE_DISABLE_TICKS);
 				player.stopUsingItem();
-				player.worldObj.playSoundAtEntity(player, Tags.MC_ASSET_VER + ":item.shield.break", 0.8F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
+				player.worldObj.playSoundAtEntity(player, Reference.MCAssetVer + ":item.shield.break", 0.8F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
 			}
 		}
 
@@ -69,7 +69,7 @@ public class ShieldHandler {
 			shield.damageItem(1 + MathHelper.floor_float(event.ammount), player);
 			if (shield.stackSize <= 0) {
 				removeBrokenShield(player, shield);
-				player.worldObj.playSoundAtEntity(player, Tags.MC_ASSET_VER + ":item.shield.break", 0.8F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
+				player.worldObj.playSoundAtEntity(player, Reference.MCAssetVer + ":item.shield.break", 0.8F, 0.8F + player.worldObj.rand.nextFloat() * 0.4F);
 			}
 		}
 	}

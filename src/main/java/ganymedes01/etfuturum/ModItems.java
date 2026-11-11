@@ -1,5 +1,7 @@
 package ganymedes01.etfuturum;
 
+import ganymedes01.etfuturum.items.equipment.ItemShield;
+import ganymedes01.etfuturum.items.ItemBannerPattern;
 import cpw.mods.fml.common.registry.GameRegistry;
 import ganymedes01.etfuturum.blocks.BlockWoodSign;
 import ganymedes01.etfuturum.compat.ModsList;

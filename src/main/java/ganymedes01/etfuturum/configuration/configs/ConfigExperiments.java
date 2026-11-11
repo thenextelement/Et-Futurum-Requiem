@@ -13,6 +13,7 @@ public class ConfigExperiments extends ConfigBase {
 	private static final String catExperiments = "experiments";
 
 	public static boolean enableSculk;
+	public static boolean enableBubbleColumns;
 	public static boolean enableCrimsonBlocks;
 	public static boolean enableWarpedBlocks;
 	public static boolean enableMangroveBlocks;

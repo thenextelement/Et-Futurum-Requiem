@@ -1,6 +1,6 @@
 package ganymedes01.etfuturum.inventory;
 
-import ganymedes01.etfuturum.Tags;
+import ganymedes01.etfuturum.lib.Reference;
 import ganymedes01.etfuturum.recipes.StonecutterRecipes;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
@@ -82,7 +82,7 @@ public class ContainerStonecutter extends ContainerWorkbenchBase {
 	@Override
 	protected void onTakeResult(EntityPlayer player, ItemStack result) {
 		input.decrStackSize(0, 1);
-		playSound(Tags.MC_ASSET_VER + ":ui.stonecutter.take_result");
+		playSound(Reference.MCAssetVer + ":ui.stonecutter.take_result");
 	}
 
 	@Override
