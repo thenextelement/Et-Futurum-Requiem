@@ -63,6 +63,7 @@ Temporary Items
 
 *.bat
 LICENSE*
+!src/main/resources/LICENSE
 forge*
 CREDITS*
 MinecraftForge*
@@ -88,3 +89,6 @@ usernamecache.json
 
 /*.kate-swp
 addon.local.gradle
+
+## Local publish tokens
+.env
