@@ -1,19 +1,16 @@
 package ganymedes01.etfuturum.world.nether.dimension;
 
-import net.minecraftforge.common.DimensionManager;
+import ganymedes01.etfuturum.world.DimensionOverrideHelper;
+import net.minecraft.world.WorldProviderHell;
 
 public class DimensionProviderEFRNether {
 
+	/**
+	 * True once our provider is actually registered for the Nether.
+	 */
+	public static boolean active;
+
 	public static void init() {
-		unregisterProviders();
-		registerProviders();
-	}
-
-	private static void unregisterProviders() {
-		DimensionManager.unregisterProviderType(-1);
-	}
-
-	private static void registerProviders() {
-		DimensionManager.registerProviderType(-1, WorldProviderEFRNether.class, true);
+		active = DimensionOverrideHelper.overrideIfVanilla(-1, WorldProviderHell.class, WorldProviderEFRNether.class, "the Et Futurum Nether dimension provider");
 	}
 }

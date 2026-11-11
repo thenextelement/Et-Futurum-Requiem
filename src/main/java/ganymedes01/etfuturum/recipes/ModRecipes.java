@@ -15,6 +15,7 @@ import ganymedes01.etfuturum.blocks.ores.modded.BlockGeneralModdedDeepslateOre;
 import ganymedes01.etfuturum.blocks.rawore.modded.BlockGeneralModdedRawOre;
 import ganymedes01.etfuturum.compat.ExternalContent;
 import ganymedes01.etfuturum.compat.ModsList;
+import ganymedes01.etfuturum.compat.PrismarineCompat;
 import ganymedes01.etfuturum.configuration.configs.*;
 import ganymedes01.etfuturum.core.utils.Utils;
 import ganymedes01.etfuturum.items.ItemNewBoat;
@@ -63,6 +64,14 @@ public class ModRecipes {
 		if (ConfigBlocksItems.enableBanners) {
 			RecipeSorter.register(Tags.MOD_ID + ".RecipeDuplicatePattern", RecipeDuplicatePattern.class, Category.SHAPELESS, "after:minecraft:shapeless");
 			RecipeSorter.register(Tags.MOD_ID + ".RecipeAddPattern", RecipeAddPattern.class, Category.SHAPED, "after:minecraft:shaped");
+		}
+
+		if (ModItems.SHIELD.isEnabled()) {
+			GameRegistry.addRecipe(new ShapedOreRecipe(ModItems.SHIELD.newItemStack(), "wiw", "www", " w ", 'w', "plankWood", 'i', "ingotIron"));
+			if (ConfigBlocksItems.enableBanners) {
+				RecipeSorter.register(Tags.MOD_ID + ".RecipeShieldDecoration", RecipeShieldDecoration.class, Category.SHAPELESS, "after:minecraft:shapeless");
+				GameRegistry.addRecipe(new RecipeShieldDecoration());
+			}
 		}
 
 		modernWoodTypesEnabled[0] = ConfigExperiments.enableCrimsonBlocks;
@@ -228,37 +237,43 @@ public class ModRecipes {
 			}
 		}
 
-		ItemStack output211 = ModBlocks.PRISMARINE_BLOCK.newItemStack();
-		RecipeHelper.addHighPriorityShapedRecipe(output211, "xx", "xx", 'x', "shardPrismarine");
-		ItemStack output210 = ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 1);
-		RecipeHelper.addHighPriorityShapedRecipe(output210, "xxx", "xxx", "xxx", 'x', "shardPrismarine");
-		ItemStack output209 = ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 2);
-		RecipeHelper.addHighPriorityShapedRecipe(output209, "xxx", "xyx", "xxx", 'x', "shardPrismarine", 'y', "dyeBlack");
-		ItemStack output208 = ModBlocks.SEA_LANTERN.newItemStack();
-		RecipeHelper.addHighPriorityShapedRecipe(output208, "xyx", "yyy", "xyx", 'x', "shardPrismarine", 'y', "crystalPrismarine");
+		if (PrismarineCompat.efrPrismarineEnabled()) {
+			ItemStack output211 = ModBlocks.PRISMARINE_BLOCK.newItemStack();
+			RecipeHelper.addHighPriorityShapedRecipe(output211, "xx", "xx", 'x', "shardPrismarine");
+			ItemStack output210 = ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 1);
+			RecipeHelper.addHighPriorityShapedRecipe(output210, "xxx", "xxx", "xxx", 'x', "shardPrismarine");
+			ItemStack output209 = ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 2);
+			RecipeHelper.addHighPriorityShapedRecipe(output209, "xxx", "xyx", "xxx", 'x', "shardPrismarine", 'y', "dyeBlack");
+			ItemStack output208 = ModBlocks.SEA_LANTERN.newItemStack();
+			RecipeHelper.addHighPriorityShapedRecipe(output208, "xyx", "yyy", "xyx", 'x', "shardPrismarine", 'y', "crystalPrismarine");
 
-		ItemStack output207 = ModBlocks.PRISMARINE_STAIRS.newItemStack(4);
-		Object[] objects161 = new Object[]{"x  ", "xx ", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack()};
-		RecipeHelper.addHighPriorityShapedRecipe(output207, objects161);
-		ItemStack output206 = ModBlocks.PRISMARINE_STAIRS_BRICK.newItemStack(4);
-		Object[] objects160 = new Object[]{"x  ", "xx ", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 1)};
-		RecipeHelper.addHighPriorityShapedRecipe(output206, objects160);
-		ItemStack output205 = ModBlocks.PRISMARINE_STAIRS_DARK.newItemStack(4);
-		Object[] objects159 = new Object[]{"x  ", "xx ", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 2)};
-		RecipeHelper.addHighPriorityShapedRecipe(output205, objects159);
-		ItemStack output204 = ModBlocks.PRISMARINE_WALL.newItemStack(6);
-		Object[] objects158 = new Object[]{"xxx", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack()};
-		RecipeHelper.addHighPriorityShapedRecipe(output204, objects158);
+			ItemStack output207 = ModBlocks.PRISMARINE_STAIRS.newItemStack(4);
+			Object[] objects161 = new Object[]{"x  ", "xx ", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack()};
+			RecipeHelper.addHighPriorityShapedRecipe(output207, objects161);
+			ItemStack output206 = ModBlocks.PRISMARINE_STAIRS_BRICK.newItemStack(4);
+			Object[] objects160 = new Object[]{"x  ", "xx ", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 1)};
+			RecipeHelper.addHighPriorityShapedRecipe(output206, objects160);
+			ItemStack output205 = ModBlocks.PRISMARINE_STAIRS_DARK.newItemStack(4);
+			Object[] objects159 = new Object[]{"x  ", "xx ", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack(1, 2)};
+			RecipeHelper.addHighPriorityShapedRecipe(output205, objects159);
+			ItemStack output204 = ModBlocks.PRISMARINE_WALL.newItemStack(6);
+			Object[] objects158 = new Object[]{"xxx", "xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack()};
+			RecipeHelper.addHighPriorityShapedRecipe(output204, objects158);
 
-		for (int i = 0; i < 3; i++) {
-			ItemStack output = ModBlocks.PRISMARINE_SLAB.newItemStack(6, i);
-			Object[] objects = new Object[]{"xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack(1, i)};
-			RecipeHelper.addHighPriorityShapedRecipe(output, objects);
+			for (int i = 0; i < 3; i++) {
+				ItemStack output = ModBlocks.PRISMARINE_SLAB.newItemStack(6, i);
+				Object[] objects = new Object[]{"xxx", 'x', ModBlocks.PRISMARINE_BLOCK.newItemStack(1, i)};
+				RecipeHelper.addHighPriorityShapedRecipe(output, objects);
+			}
 		}
 
 		if (!ModsList.BOTANIA.isLoaded()) {
 			ItemStack output1 = ModItems.PRISMARINE_SHARD.newItemStack(4);
 			RecipeHelper.addHighPriorityShapedRecipe(output1, "xy", "zx", 'x', "gemQuartz", 'y', "dyeBlue", 'z', "dyeGreen");
+		}
+
+		// Crystals have no Botania equivalent, so they stay craftable with or without Botania
+		if (ModItems.PRISMARINE_CRYSTALS.isEnabled()) {
 			ItemStack output = ModItems.PRISMARINE_CRYSTALS.newItemStack(4);
 			RecipeHelper.addHighPriorityShapedRecipe(output, "xy", "yx", 'x', "gemQuartz", 'y', "dustGlowstone");
 		}
@@ -1764,9 +1779,21 @@ public class ModRecipes {
 
 		RecipeHelper.addHighPriorityShapelessRecipe(new ItemStack(Items.dye, 1, 9), ModBlocks.PINK_PETALS.get());
 
-		if (!ConfigExperiments.netherDimensionProvider) { //A way to get soul soil without new Nether
+		if (!ConfigExperiments.netherDimensionProvider || ModsList.NETHERLICIOUS.isLoaded() || ModsList.BIOMES_O_PLENTY.isLoaded()) { //A way to get soul soil when our Nether isn't generating it
 			ItemStack output12 = ModBlocks.SOUL_SOIL.newItemStack(5);
 			RecipeHelper.addHighPriorityShapelessRecipe(output12, Blocks.dirt, Blocks.soul_sand, Blocks.soul_sand, Blocks.soul_sand, Blocks.soul_sand);
+		}
+
+		if (ModItems.BANNER_PATTERN.isEnabled()) {
+			Object[] ingredients = {new ItemStack(Blocks.red_flower, 1, 8), new ItemStack(Items.skull, 1, 4), new ItemStack(Items.skull, 1, 1),
+					new ItemStack(Items.golden_apple, 1, 1), Blocks.brick_block, Blocks.vine};
+			for (int i = 0; i < ingredients.length; i++) {
+				RecipeHelper.addHighPriorityShapelessRecipe(ModItems.BANNER_PATTERN.newItemStack(1, i), Items.paper, ingredients[i]);
+			}
+		}
+
+		if (ModBlocks.LIGHTNING_ROD.isEnabled()) {
+			RecipeHelper.addHighPriorityShapedRecipe(ModBlocks.LIGHTNING_ROD.newItemStack(), "X", "X", "X", 'X', "ingotCopper");
 		}
 
 		if (ConfigModCompat.moddedDeepslateOres) { //OreDict-based registration is only used when mod support is enabled

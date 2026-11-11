@@ -1,5 +1,7 @@
 package ganymedes01.etfuturum.client.renderer.item;
 
+import ganymedes01.etfuturum.client.renderer.tileentity.DragonHeadRenderer;
+
 import com.mojang.authlib.GameProfile;
 import ganymedes01.etfuturum.client.OpenGLHelper;
 import ganymedes01.etfuturum.client.renderer.tileentity.TileEntityFancySkullRenderer;
@@ -36,7 +38,9 @@ public class ItemSkullRenderer implements IItemRenderer {
 				renderSkull(0.5F, 0.35F, 0.25F, stack.getItemDamage(), profile);
 				break;
 			case INVENTORY:
-				OpenGLHelper.scale(1.5, 1.5, 1.5);
+				// The dragon head model is bigger than a mob head; keep it inside the slot
+				float scale = stack.getItemDamage() == DragonHeadRenderer.TYPE ? 1.25F : 1.5F;
+				OpenGLHelper.scale(scale, scale, scale);
 				renderSkull(0.75F, 0.30F, 0.5F, stack.getItemDamage(), profile);
 				break;
 			default:

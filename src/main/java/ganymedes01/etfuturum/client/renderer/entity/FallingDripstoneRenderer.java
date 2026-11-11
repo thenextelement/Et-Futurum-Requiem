@@ -46,7 +46,7 @@ public class FallingDripstoneRenderer extends Render {
 			tessellator.startDrawingQuads();
 			tessellator.setTranslation((float) (-i) - 0.5F, (float) (-j) - 0.5F, (float) (-k) - 0.5F);
 			field_147920_a.setRenderBoundsFromBlock(block);
-			field_147920_a.drawCrossedSquares(ModBlocks.POINTED_DRIPSTONE.get().getIcon(0, p_76986_1_.field_145814_a), i, j, k, 1.0F);
+			field_147920_a.drawCrossedSquares(ModBlocks.POINTED_DRIPSTONE.get().getIcon(0, p_76986_1_.getDripstoneMeta()), i, j, k, 1.0F);
 			tessellator.setTranslation(0.0D, 0.0D, 0.0D);
 			tessellator.draw();
 

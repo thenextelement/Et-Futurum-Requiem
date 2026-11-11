@@ -19,7 +19,9 @@ import ganymedes01.etfuturum.client.DynamicSoundsResourcePack;
 import ganymedes01.etfuturum.client.GrayscaleWaterResourcePack;
 import ganymedes01.etfuturum.client.sound.BlockSoundRegisterHelper;
 import ganymedes01.etfuturum.client.sound.ModSounds;
+import ganymedes01.etfuturum.command.CommandBuild;
 import ganymedes01.etfuturum.command.CommandFill;
+import ganymedes01.etfuturum.command.CommandLocate;
 import ganymedes01.etfuturum.compat.*;
 import ganymedes01.etfuturum.configuration.ConfigBase;
 import ganymedes01.etfuturum.configuration.configs.*;
@@ -40,6 +42,8 @@ import ganymedes01.etfuturum.spectator.SpectatorMode;
 import ganymedes01.etfuturum.world.EtFuturumEarlyWorldGenerator;
 import ganymedes01.etfuturum.world.EtFuturumLateWorldGenerator;
 import ganymedes01.etfuturum.world.EtFuturumWorldGenerator;
+import ganymedes01.etfuturum.world.end.EndGatewaySpawner;
+import ganymedes01.etfuturum.world.end.city.EndCityGenerator;
 import ganymedes01.etfuturum.world.end.dimension.DimensionProviderEFREnd;
 import ganymedes01.etfuturum.world.nether.biome.utils.NetherBiomeManager;
 import ganymedes01.etfuturum.world.nether.dimension.DimensionProviderEFRNether;
@@ -47,6 +51,7 @@ import ganymedes01.etfuturum.world.structure.OceanMonument;
 import makamys.mclib.core.MCLib;
 import makamys.mclib.core.MCLibModules;
 import makamys.mclib.ext.assetdirector.ADConfig;
+import ganymedes01.etfuturum.client.gui.modern.ModernGuiTextures;
 import makamys.mclib.ext.assetdirector.AssetDirectorAPI;
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockTrapDoor;
@@ -164,6 +169,10 @@ public class EtFuturum {
 		ADConfig config = new ADConfig();
 
 		getSounds(config);
+		if (ConfigBlocksItems.enableStonecutter || ConfigBlocksItems.enableLoom || ConfigBlocksItems.enableCartographyTable) {
+			// Container GUI textures are read from Mojang's own client jar at runtime
+			config.addJar(ModernGuiTextures.ASSET_VERSION);
+		}
 
 		AssetDirectorAPI.register(config);
 
@@ -228,6 +237,11 @@ public class EtFuturum {
 		GameRegistry.registerWorldGenerator(EtFuturumEarlyWorldGenerator.INSTANCE, Integer.MIN_VALUE);
 		GameRegistry.registerWorldGenerator(EtFuturumWorldGenerator.INSTANCE, 0);
 		GameRegistry.registerWorldGenerator(EtFuturumLateWorldGenerator.INSTANCE, Integer.MAX_VALUE);
+		if (ConfigWorld.enableEndCities) {
+			GameRegistry.registerWorldGenerator(EndCityGenerator.INSTANCE, 10);
+			MinecraftForge.EVENT_BUS.register(EndCityGenerator.INSTANCE);
+			FMLCommonHandler.instance().bus().register(EndCityGenerator.INSTANCE);
+		}
 
 		OceanMonument.makeMap();
 
@@ -368,6 +382,10 @@ public class EtFuturum {
 		if (ModsList.TINKERS_CONSTRUCT.isLoaded()) {
 			CompatTinkersConstruct.postInit();
 		}
+
+		if (ModItems.SHIELD.isEnabled() && ModsList.BACKHAND.isLoaded()) {
+			CompatBackhand.postInit();
+		}
 	}
 
 	@EventHandler
@@ -422,7 +440,10 @@ public class EtFuturum {
 		}
 
 		if (ConfigExperiments.endDimensionProvider) {
-			DimensionProviderEFREnd.init(); // Come back to
+			DimensionProviderEFREnd.init();
+			if (DimensionProviderEFREnd.active) {
+				MinecraftForge.EVENT_BUS.register(EndGatewaySpawner.INSTANCE);
+			}
 		}
 	}
 
@@ -458,6 +479,12 @@ public class EtFuturum {
 	public void serverStarting(FMLServerStartingEvent event) {
 		if (ConfigFunctions.enableFillCommand) {
 			event.registerServerCommand(new CommandFill());
+		}
+		if (ConfigFunctions.enableBuildCommand) {
+			event.registerServerCommand(new CommandBuild());
+		}
+		if (ConfigFunctions.enableLocateCommand) {
+			event.registerServerCommand(new CommandLocate());
 		}
 	}
 
@@ -619,6 +646,8 @@ public class EtFuturum {
 		config.addSoundEvent(ver, "music_disc.otherside", "record");
 
 		config.addSoundEvent(ver, "item.elytra.flying", "player");
+		config.addSoundEvent(ver, "item.shield.block", "player");
+		config.addSoundEvent(ver, "item.shield.break", "player");
 		config.addSoundEvent(ver, "enchant.thorns.hit", "player");
 		config.addSoundEvent(ver, "entity.boat.paddle_land", "player");
 		config.addSoundEvent(ver, "entity.boat.paddle_water", "player");
@@ -768,6 +797,10 @@ public class EtFuturum {
 		config.addSoundEvent(ver, "block.smithing_table.use", "player");
 		config.addSoundEvent(ver, "block.enchantment_table.use", "player");
 		config.addSoundEvent(ver, "block.beacon.activate", "block");
+		config.addSoundEvent(ver, "block.sculk_catalyst.bloom", "block");
+		config.addSoundEvent(ver, "ui.stonecutter.take_result", "block");
+		config.addSoundEvent(ver, "ui.loom.take_result", "block");
+		config.addSoundEvent(ver, "ui.cartography_table.take_result", "block");
 		config.addSoundEvent(ver, "block.beacon.ambient", "block");
 		config.addSoundEvent(ver, "block.beacon.deactivate", "block");
 		config.addSoundEvent(ver, "block.beacon.power_select", "block");

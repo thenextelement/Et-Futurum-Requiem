@@ -89,11 +89,7 @@ public class EtFuturumWorldListener implements IWorldAccess {
 		}
 
 		// Validate bubble column registrations, ensuring that disabled columns do not get registered.
-		for(Map.Entry<String, BlockBubbleColumn> entry : BUBBLE_COLUMN_TAGS.entrySet()) {
-			if(!RecipeHelper.validateItems(entry.getValue())) {
-				BUBBLE_COLUMN_TAGS.remove(entry.getKey(), entry.getValue());
-			}
-		}
+		BUBBLE_COLUMN_TAGS.values().removeIf(column -> !RecipeHelper.validateItems(column));
 	}
 
 	@Override

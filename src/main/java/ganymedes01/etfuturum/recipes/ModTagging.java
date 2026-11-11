@@ -9,6 +9,7 @@ import ganymedes01.etfuturum.blocks.BlockBerryBush;
 import ganymedes01.etfuturum.blocks.IDegradable;
 import ganymedes01.etfuturum.client.sound.ModSounds;
 import ganymedes01.etfuturum.compat.ModsList;
+import ganymedes01.etfuturum.compat.PrismarineCompat;
 import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
 import ganymedes01.etfuturum.configuration.configs.ConfigExperiments;
 import ganymedes01.etfuturum.configuration.configs.ConfigFunctions;
@@ -204,10 +205,14 @@ public class ModTagging {
 		RecipeHelper.registerOre("listAllmeatcooked", ModItems.MUTTON_COOKED.get());
 		RecipeHelper.registerOre("listAllmuttoncooked", ModItems.MUTTON_COOKED.get());
 
-		RecipeHelper.registerOre("shardPrismarine", ModItems.PRISMARINE_SHARD.get());
-		RecipeHelper.registerOre("crystalPrismarine", ModItems.PRISMARINE_CRYSTALS.get());
-		ItemStack ore33 = ModBlocks.PRISMARINE_BLOCK.newItemStack(1, OreDictionary.WILDCARD_VALUE);
-		RecipeHelper.registerOre("blockPrismarine", ore33);
+		if (PrismarineCompat.efrPrismarineEnabled()) {
+			RecipeHelper.registerOre("shardPrismarine", ModItems.PRISMARINE_SHARD.get());
+			ItemStack ore33 = ModBlocks.PRISMARINE_BLOCK.newItemStack(1, OreDictionary.WILDCARD_VALUE);
+			RecipeHelper.registerOre("blockPrismarine", ore33);
+		}
+		if (ModItems.PRISMARINE_CRYSTALS.isEnabled()) {
+			RecipeHelper.registerOre("crystalPrismarine", ModItems.PRISMARINE_CRYSTALS.get());
+		}
 
 		for (ModBlocks door : ModBlocks.DOORS) {
 			RecipeHelper.registerOre("doorWood", door.get());

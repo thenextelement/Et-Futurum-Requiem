@@ -22,6 +22,10 @@ public class EtFuturumLateMixins implements ILateMixinLoader {
 	public List<String> getMixins(Set<String> loadedMods) {
 		List<String> mixins = new ObjectArrayList<>();
 
+		if (loadedMods.contains("astralsorcery")) {
+			mixins.add("astralsorcery.MixinStructureBlockArray");
+		}
+
 		if (ConfigMixins.enableElytra && loadedMods.stream().anyMatch(name -> name.equals("Thaumcraft"))) {
 			mixins.add("backlytra.thaumcraft.MixinEventHandlerEntity");
 		}

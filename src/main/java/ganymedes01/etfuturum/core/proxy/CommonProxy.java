@@ -14,6 +14,7 @@ import ganymedes01.etfuturum.configuration.configs.*;
 import ganymedes01.etfuturum.core.handlers.EntityEventHandler;
 import ganymedes01.etfuturum.core.handlers.SculkEventHandler;
 import ganymedes01.etfuturum.core.handlers.ServerEventHandler;
+import ganymedes01.etfuturum.core.handlers.ShieldHandler;
 import ganymedes01.etfuturum.core.handlers.WorldEventHandler;
 import ganymedes01.etfuturum.core.utils.Logger;
 import ganymedes01.etfuturum.core.utils.Utils;
@@ -62,6 +63,10 @@ public class CommonProxy implements IGuiHandler {
 			MinecraftForge.EVENT_BUS.register(SculkEventHandler.INSTANCE);
 		}
 
+		if (ModItems.SHIELD.isEnabled()) {
+			MinecraftForge.EVENT_BUS.register(ShieldHandler.INSTANCE);
+		}
+
 		if (ModItems.DEBUGGING_TOOL.isEnabled()) {
 			MinecraftForge.EVENT_BUS.register(ModItems.DEBUGGING_TOOL.get());
 		}
@@ -88,6 +93,9 @@ public class CommonProxy implements IGuiHandler {
 		}
 		if (ModBlocks.SCULK_CATALYST.isEnabled()) {
 			GameRegistry.registerTileEntity(TileEntitySculkCatalyst.class, Utils.getUnlocalisedName("sculk_catalyst"));
+		}
+		if (ModBlocks.LIGHTNING_ROD.isEnabled()) {
+			GameRegistry.registerTileEntity(TileEntityLightningRod.class, Utils.getUnlocalisedName("lightning_rod"));
 		}
 		if (ModBlocks.END_GATEWAY.isEnabled()) {
 			GameRegistry.registerTileEntity(TileEntityGateway.class, Utils.getUnlocalisedName("end_gateway"));
@@ -209,9 +217,9 @@ public class CommonProxy implements IGuiHandler {
 			}
 		}
 
-//      {
-//          ModEntityList.registerEntity(EntityFallingDripstone.class, "falling_dripstone", 18, EtFuturum.instance, 64, 1, true);
-//      }
+		if (ModBlocks.POINTED_DRIPSTONE.isEnabled()) {
+			ModEntityList.registerEntity(EntityFallingDripstone.class, "falling_dripstone", 18, EtFuturum.instance, 64, 1, true);
+		}
 
 		if (ConfigBlocksItems.enableNewBoats) {
 			ModEntityList.registerEntity(EntityNewBoat.class, "new_boat", 13, EtFuturum.instance, 64, 1, true);
@@ -247,6 +255,10 @@ public class CommonProxy implements IGuiHandler {
 			case GUIIDs.SHULKER_BOX ->
 					new ContainerChestGeneric(player.inventory, (TileEntityShulkerBox) world.getTileEntity(x, y, z), ((TileEntityShulkerBox) world.getTileEntity(x, y, z)).getRowSize(), ((TileEntityShulkerBox) world.getTileEntity(x, y, z)).getSizeInventory() != 27);
 			case GUIIDs.SMITHING_TABLE -> new ContainerSmithingTable(player.inventory, world);
+			case GUIIDs.STONECUTTER -> new ContainerStonecutter(player.inventory, world, x, y, z);
+			case GUIIDs.LOOM -> new ContainerLoom(player.inventory, world, x, y, z);
+			case GUIIDs.CARTOGRAPHY_TABLE -> new ContainerCartographyTable(player.inventory, world, x, y, z);
+			case GUIIDs.FLETCHING_TABLE -> new ContainerFletchingTable(player.inventory, world, x, y, z);
 			default -> null;
 		};
 	}
@@ -265,6 +277,10 @@ public class CommonProxy implements IGuiHandler {
 			case GUIIDs.SHULKER_BOX ->
 					new GuiShulkerBox(player.inventory, (TileEntityShulkerBox) world.getTileEntity(x, y, z));
 			case GUIIDs.SMITHING_TABLE -> new GuiSmithingTable(new ContainerSmithingTable(player.inventory, world));
+			case GUIIDs.STONECUTTER -> new GuiStonecutter(new ContainerStonecutter(player.inventory, world, x, y, z));
+			case GUIIDs.LOOM -> new GuiLoom(new ContainerLoom(player.inventory, world, x, y, z));
+			case GUIIDs.CARTOGRAPHY_TABLE -> new GuiCartographyTable(new ContainerCartographyTable(player.inventory, world, x, y, z));
+			case GUIIDs.FLETCHING_TABLE -> new GuiFletchingTable(new ContainerFletchingTable(player.inventory, world, x, y, z));
 			default -> null;
 		};
 	}

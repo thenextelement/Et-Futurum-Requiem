@@ -1,5 +1,7 @@
 package ganymedes01.etfuturum.core.utils.structurenbt;
 
+import ganymedes01.etfuturum.configuration.configs.ConfigBlocksItems;
+
 import cpw.mods.fml.common.registry.GameRegistry;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
@@ -133,6 +135,7 @@ public class BlockStateConverter {
 					case "zombie" -> type = 2;
 					case "player" -> type = 3;
 					case "creeper" -> type = 4;
+					case "dragon" -> type = ConfigBlocksItems.enableDragonHead ? 5 : 0;
 					default -> {
 					}
 				}
@@ -1065,6 +1068,9 @@ public class BlockStateConverter {
 				case "creeper_head":
 				case "creeper_wall_head":
 					return Blocks.skull;
+				case "dragon_head":
+				case "dragon_wall_head":
+					return ConfigBlocksItems.enableDragonHead ? Blocks.skull : Blocks.air;
 
 				case "attached_pumpkin_stem":
 					return Blocks.pumpkin_stem;

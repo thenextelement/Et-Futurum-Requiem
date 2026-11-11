@@ -62,7 +62,7 @@ dependencies {
     annotationProcessor("org.projectlombok:lombok:1.18.42")
     compileOnly('org.jetbrains:annotations:24.0.1')
 
-    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.12.6-GTNH:dev") {
+    compileOnly("com.github.GTNewHorizons:TinkersConstruct:1.12.13-GTNH:dev") {
         transitive = false
     }
 
@@ -70,9 +70,21 @@ dependencies {
         transitive = false
     }
 
-    compileOnly("com.github.GTNewHorizons:lwjgl3ify:2.1.2:api") {
+    // Offhand shields; runtime too so the dev client has an offhand slot
+    devOnlyNonPublishable("com.github.GTNewHorizons:Backhand:1.8.16:dev") { transitive = false }
+
+    compileOnly("com.github.GTNewHorizons:lwjgl3ify:2.1.5:api") {
         transitive = false
     }
+
+    // Standard dev stack (runtime only, not published)
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Hodgepodge:2.8.1:dev")
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:NotEnoughItems:2.9.3-GTNH:dev")
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:GTNHLib:0.12.0:dev")
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:ModularUI2:2.4.0-1.7.10:dev")
+    runtimeOnlyNonPublishable("curse.maven:archaicfix-677782:6785842")
+    runtimeOnlyNonPublishable("com.github.GTNewHorizons:Angelica:2.2.45:dev")
+    runtimeOnlyNonPublishable(rfg.deobf("curse.maven:catalogue-vintage-1465746:8384975")) // 1.0.8-1.7.10
 
     shadowImplementation('com.github.makamys:MCLib:0.3.7.7') {
         exclude group: "codechicken"
