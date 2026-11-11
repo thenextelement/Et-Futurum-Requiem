@@ -1,4 +1,4 @@
-package ganymedes01.etfuturum.mixins.early.backlytra.thaumcraft;
+package ganymedes01.etfuturum.mixins.late.backlytra.thaumcraft;
 
 import ganymedes01.etfuturum.elytra.IElytraPlayer;
 import net.minecraft.entity.player.EntityPlayer;
