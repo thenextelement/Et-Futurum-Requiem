@@ -10,6 +10,8 @@ def NEXT_VERSION = ext.modVersion
 // Append to the version as needed. If the variables look a bit strange, that's because they are -
 // git-version doesn't expose a ton of useful functions, we need to extract them indirectly.
 
+// Release CI sets VERSION to the tag, and the GTNH convention then skips the git-version plugin, so only use it locally.
+if (System.getenv("VERSION") == null) {
 def details = versionDetails()
 
 // If we have a clean tag (or manually specified), this is a production release.
@@ -29,6 +31,7 @@ if (!isPlainTag && !noCommitHash) {
 def isDirty = gitVersion().endsWith(".dirty")
 if (isDirty && !noCommitHash) {
     NEXT_VERSION += "-dirty"
+}
 }
 
 //Set the mod and jar version to the info we just collected.
