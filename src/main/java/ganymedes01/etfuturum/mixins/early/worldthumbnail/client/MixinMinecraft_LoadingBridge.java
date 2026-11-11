@@ -15,7 +15,8 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.Redirect;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
-@Mixin(Minecraft.class)
+// Below archaicfix's 999 so its loading-screen redirect on the same call wins; ours is then skipped quietly.
+@Mixin(value = Minecraft.class, priority = 998)
 public class MixinMinecraft_LoadingBridge {
 
     @Inject(method = "launchIntegratedServer", at = @At("HEAD"))
@@ -26,7 +27,8 @@ public class MixinMinecraft_LoadingBridge {
     @Redirect(method = "launchIntegratedServer",
             at = @At(value = "INVOKE",
                     target = "Lnet/minecraft/client/Minecraft;displayGuiScreen(Lnet/minecraft/client/gui/GuiScreen;)V",
-                    ordinal = 1))
+                    ordinal = 1),
+            require = 0, expect = 0)
     private void etfu$bridgeLoadingScreen(Minecraft mc, GuiScreen screen) {
         LoadingScreenHooks.beginIntegratedLaunch();
         Framebuffer fb = mc.getFramebuffer();
