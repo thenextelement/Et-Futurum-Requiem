@@ -1,26 +1,50 @@
 # Et Futurum Requiem
 
+Backports features from modern Minecraft to 1.7.10 on top of the GTNH base.
+
+<img src="images/logo_small.png" alt="Et Futurum Requiem logo" width="200" />
+
 **Download: [CurseForge](https://www.curseforge.com/minecraft/mc-mods/et-futurum-requiem/files)
 | [Modrinth](https://modrinth.com/mod/etfuturum/versions)**
 
-WARNING!
+## Features
 
-Though this project is licensed under the LGPL-3.0 a lot of the code featured here is a direct copy or adaptation of
-Mojangs original code. So be careful with what you do with it.
+Backported features this build has which are not present in the GTNH branch:
 
-This project is jss2a98aj's fork of KryptonCaptain's Et Futurum build, as well as a merge of my own (Roadhog460's)
-changes I made to Et Futurum and never published anywhere. Thanks to other incredible notable contributors such as
-makamys among various things, including helping setup mixins, contributed hugely useful changes like porting the
-expanded container code for Iron Shulker Boxes, and CI + nomixin to the gradle and GitHub scripts. And embeddedt who
-contributed some incredibly large-scale backports like the Backlytra port and spectator mode, the F3 gamemode switcher
-and other really good contributions.
-
-The mod uses MCLib's AssetDirector module to download assets from Mojang's servers.
-Check [its wiki page](https://github.com/makamys/MCLib/wiki/AssetDirector) for more information.
+* `/locate` command, and `/efrbuild <structurename>` to build any world gen structure added by the mod.
+* Shields, including banner decoration.
+* End cities, ships, elytra, dragon heads and more. Outer End islands generate with cities, and gateways generate once per dragon kill.
+* Nether biomes generate and function as intended, though the default biome is still called hell and not nether wastes.
+* Lightning rods, stonecutter, cartography table and loom. All the blocks that are decoration only in the GTNH branch have their expected GUIs, and the fletching table applies potions to arrows to make tipped arrows.
+* Prismarine uses Botania's prismarine when Botania is loaded.
+* Outside of the lower rock layer, ores and a few decorations, there is no overworld generation yet.
 
 ## Dependencies
 
 The mod requires [UniMixins](https://modrinth.com/mod/unimixins), more specifically, the GTNH module.
+
+## Building
+
+```
+./gradlew build
+```
+
+The buildscript takes the version from the latest git tag. Before the first tag, build with `VERSION=<ver> ./gradlew build`.
+
+## Credits
+
+* [KryptonCaptain](https://github.com/KryptonCaptain)'s Et Futurum build, and [jss2a98aj](https://github.com/jss2a98aj)'s fork of it.
+* Roadhog360 (Roadhog460) for the HogUtils-era changes and the bubble column and tag work.
+* makamys for mixin setup, the Iron Shulker Box container port, and the CI and nomixin scripts.
+* embeddedt for the Backlytra port, spectator mode and the F3 gamemode switcher.
+* The GTNH buildscript and [GTNewHorizons](https://github.com/GTNewHorizons).
+* The mod uses MCLib's AssetDirector module to download assets from Mojang's servers. See [its wiki page](https://github.com/makamys/MCLib/wiki/AssetDirector).
+
+## License
+
+Et Futurum Requiem is licensed under the LGPL-3.0. A copy is in [`src/main/resources/LICENSE`](src/main/resources/LICENSE).
+
+A lot of the code featured here is a direct copy or adaptation of Mojang's original code, so be careful with what you do with it.
 
 ## Contributing
 
